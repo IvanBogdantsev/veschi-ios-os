@@ -6,5 +6,5 @@
 //
 
 enum Strings {
-    
+    static let veschi = "Veschi"
 }

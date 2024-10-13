@@ -5,4 +5,6 @@
 //  Created by Vanya Bogdantsev on 12.10.2024.
 //
 
-import Foundation
+enum Emojis {
+    static let package = "📦"
+}

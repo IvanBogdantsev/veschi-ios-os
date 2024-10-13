@@ -7,21 +7,19 @@
 
 import Foundation
 
-enum AnimationDuration: TimeInterval {
+enum AnimationDuration {
     /// 0.1 sec
-    case zeroOneSecond = 0.1
+    static let zeroOneSecond: TimeInterval = 0.1
     /// 0.2 sec
-    case zeroTwoSecond = 0.2
+    static let zeroTwoSecond: TimeInterval = 0.2
     /// 0.3 sec
-    case zeroThreeSecond = 0.3
+    static let zeroThreeSecond: TimeInterval = 0.3
     /// 0.4 sec
-    case zeroFourSecond = 0.4
+    static let zeroFourSecond: TimeInterval = 0.4
     /// 0.5 sec
-    case zeroFiveSecond = 0.5
+    static let zeroFiveSecond: TimeInterval = 0.5
     /// 0.6 sec
-    case zeroSixSecond = 0.6
-    
-    var timeInterval: TimeInterval {
-        return rawValue
-    }
+    static let zeroSixSecond: TimeInterval = 0.6
+    ///  1 sec
+    static let oneSecond: TimeInterval = 1
 }

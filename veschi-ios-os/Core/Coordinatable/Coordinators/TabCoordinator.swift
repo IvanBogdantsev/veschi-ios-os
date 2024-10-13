@@ -50,7 +50,7 @@ final class TabCoordinator: BaseCoordinator {
         prepareTabBarController(withTabControllers: controllers)
         UIView.transition(
             with: self.router.rootController.view, //MARK: TO CHECK
-            duration: AnimationDuration.zeroTwoSecond.timeInterval,
+            duration: AnimationDuration.zeroTwoSecond,
             options: .transitionCrossDissolve,
             animations: {
                 self.router.setRootModule(self.tabBarController, hideBar: true)

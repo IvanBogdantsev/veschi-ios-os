@@ -27,7 +27,7 @@ extension UIView {
         return foundViews
     }
     /// Changes view's alpha to 1.
-    func show(animated: Bool, duration: TimeInterval = AnimationDuration.zeroThreeSecond.timeInterval,
+    func show(animated: Bool, duration: TimeInterval = AnimationDuration.zeroThreeSecond,
               completion: ((Bool) -> Void)? = nil) {
         let withDuration: TimeInterval = animated ? duration : 0
         UIView.animate(withDuration: withDuration, animations: {
@@ -35,7 +35,7 @@ extension UIView {
         }, completion: completion)
     }
     /// Changes view's alpha to 0.
-    func hide(animated: Bool, duration: TimeInterval = AnimationDuration.zeroThreeSecond.timeInterval,
+    func hide(animated: Bool, duration: TimeInterval = AnimationDuration.zeroThreeSecond,
               completion: ((Bool) -> Void)? = nil) {
         let withDuration: TimeInterval = animated ? duration : 0
         UIView.animate(withDuration: withDuration, animations: {

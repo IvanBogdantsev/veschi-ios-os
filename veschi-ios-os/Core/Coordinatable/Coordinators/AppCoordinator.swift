@@ -25,6 +25,9 @@ final class AppCoordinator: BaseCoordinator {
     
     override func start() {
         router.setRootModule(SplashAssembly(sceneOutput: self).makeScene())
+        DispatchQueue.main.asyncAfter(deadline: .now() + AnimationDuration.oneSecond) {
+            
+        }
     }
     
 }

@@ -11,6 +11,7 @@
 		4E7B82512CBB14E800322C2F /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4E7B82502CBB14E800322C2F /* RxRelay */; };
 		4E7B82532CBB14E800322C2F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4E7B82522CBB14E800322C2F /* RxSwift */; };
 		4E7B825B2CBB150000322C2F /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 4E7B825A2CBB150000322C2F /* SkeletonView */; };
+		4E8EE88E2CBC0452006FFF89 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8EE88D2CBC0452006FFF89 /* Appwrite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 				4E7B82512CBB14E800322C2F /* RxRelay in Frameworks */,
 				4E7B825B2CBB150000322C2F /* SkeletonView in Frameworks */,
 				4E7B824F2CBB14E800322C2F /* RxCocoa in Frameworks */,
+				4E8EE88E2CBC0452006FFF89 /* Appwrite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +95,7 @@
 				4E7B82502CBB14E800322C2F /* RxRelay */,
 				4E7B82522CBB14E800322C2F /* RxSwift */,
 				4E7B825A2CBB150000322C2F /* SkeletonView */,
+				4E8EE88D2CBC0452006FFF89 /* Appwrite */,
 			);
 			productName = "veschi-ios-os";
 			productReference = 4E7B81D02CBB133400322C2F /* veschi-ios-os.app */;
@@ -125,6 +128,7 @@
 			packageReferences = (
 				4E7B824D2CBB14E800322C2F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				4E7B82592CBB150000322C2F /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				4E8EE88C2CBC0452006FFF89 /* XCRemoteSwiftPackageReference "sdk-for-apple" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4E7B81D12CBB133400322C2F /* Products */;
@@ -370,6 +374,14 @@
 				minimumVersion = 1.31.0;
 			};
 		};
+		4E8EE88C2CBC0452006FFF89 /* XCRemoteSwiftPackageReference "sdk-for-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appwrite/sdk-for-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -392,6 +404,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E7B82592CBB150000322C2F /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
+		};
+		4E8EE88D2CBC0452006FFF89 /* Appwrite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E8EE88C2CBC0452006FFF89 /* XCRemoteSwiftPackageReference "sdk-for-apple" */;
+			productName = Appwrite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
