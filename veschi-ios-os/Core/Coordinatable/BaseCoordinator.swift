@@ -1,6 +1,6 @@
 //
 //  BaseCoordinator.swift
-//  
+//
 //
 //  Created by  Ivan B  on 16.05.23.
 //
@@ -11,20 +11,19 @@ class BaseCoordinator: NSObject, Coordinatable {
     
     let router: Router
     var children: [Coordinatable]
-
-    weak var startingViewController: UIViewController?
+    
     weak var parent: Coordinatable?
-
+    
     init(router: Router) {
         children = [Coordinatable]()
         self.router = router
         super.init()
     }
-
+    
     deinit {
         children.removeAll()
     }
-
+    
     func start() {}
     
     func add(_ child: Coordinatable) {
@@ -33,7 +32,7 @@ class BaseCoordinator: NSObject, Coordinatable {
         }
         children.append(child)
     }
-
+    
     func remove(_ child: Coordinatable) {
         guard !children.isEmpty else { return }
         for (index, element) in children.enumerated() where element === child {

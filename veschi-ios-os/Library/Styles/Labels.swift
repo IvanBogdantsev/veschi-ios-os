@@ -8,8 +8,7 @@
 import UIKit.UILabel
 
 enum Labels {
-    static func logoTitle(text: String? = nil) -> UILabel
-    {
+    static func logoTitle(text: String? = nil) -> UILabel {
         let label = UILabel()
         label.setup(text: text, multiline: false, font: Fonts.logoTitle, textColor: Colors.text, centered: true, adjustsFontSizeToFitWidth: true)
         return label

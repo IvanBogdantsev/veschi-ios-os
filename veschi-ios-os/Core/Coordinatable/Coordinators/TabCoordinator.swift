@@ -41,7 +41,6 @@ final class TabCoordinator: BaseCoordinator {
         self.navigationController = navigationController
         tabBarController = UITabBarController()
         super.init(router: Router(rootController: navigationController))
-        startingViewController = tabBarController
         setupAppearance()
     }
     

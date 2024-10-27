@@ -8,7 +8,7 @@
 import Appwrite
 import Foundation
 
-protocol Database {
+protocol DatabaseProtocol {
     func getItems<T: Codable>(_ type: T.Type, from collection: AWCollection, queries: [String]?) async throws -> [T]
     func getItem<T: Codable>(_ type: T.Type, from collection: AWCollection, id: String, queries: [String]?) async throws -> T
     func createItem(_ item: Codable, in collection: AWCollection, id: String) async throws
@@ -20,7 +20,7 @@ enum AWCollection {
     case users
 }
 
-final class AWDatabase: AWClient, Database {
+final class AWDatabase: AWClient, DatabaseProtocol {
     
     static let shared = AWDatabase()
     

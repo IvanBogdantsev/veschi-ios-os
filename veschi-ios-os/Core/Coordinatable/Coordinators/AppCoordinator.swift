@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol SplashSceneOutput: AnyObject {
-    func proceedFromSplash()
-}
-
 final class AppCoordinator: BaseCoordinator {
     
     private weak var window: UIWindow?
@@ -24,14 +20,7 @@ final class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        router.setRootModule(SplashAssembly(sceneOutput: self).makeScene())
-        DispatchQueue.main.asyncAfter(deadline: .now() + AnimationDuration.oneSecond) {
-            
-        }
+        router.setRootModule(SplashViewController())
     }
     
-}
-
-extension AppCoordinator: SplashSceneOutput {
-    func proceedFromSplash() {}
 }

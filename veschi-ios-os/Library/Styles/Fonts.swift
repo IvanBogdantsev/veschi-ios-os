@@ -1,6 +1,6 @@
 //
 //  Fonts.swift
-//  
+//
 //
 //  Created by Vanya Bogdantsev on 20.08.2023.
 //
@@ -24,26 +24,26 @@ fileprivate extension UIFont {
     func bolded() -> UIFont {
         return with(traits: .traitBold)
     }
-
+    
     func italicized() -> UIFont {
         return with(traits: .traitItalic)
     }
-
+    
     func semibolded() -> UIFont {
         return withWeight(.semibold)
     }
-
+    
     func lighted() -> UIFont {
         return withWeight(.light)
     }
-
+    
     private func with(traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
         guard let descriptor = fontDescriptor.withSymbolicTraits(traits) else {
             return self
         }
         return UIFont(descriptor: descriptor, size: pointSize)
     }
-
+    
     private func withWeight(_ weight: UIFont.Weight) -> UIFont {
         let descriptor = fontDescriptor.addingAttributes([.traits: [UIFontDescriptor.TraitKey.weight: weight]])
         return UIFont(descriptor: descriptor, size: pointSize)

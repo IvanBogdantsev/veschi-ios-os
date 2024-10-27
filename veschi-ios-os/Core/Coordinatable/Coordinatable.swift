@@ -8,7 +8,6 @@
 import UIKit
 
 protocol Coordinatable: AnyObject {
-    var startingViewController: UIViewController? { get }
     var parent: Coordinatable? { get }
     var children: [Coordinatable] { get }
     
