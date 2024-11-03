@@ -1,9 +1,5 @@
-//
-//  AuthCoordinator.swift
 //  veschi-ios-os
-//
-//  Created by Vanya Bogdantsev on 23.10.2024.
-//
+//  Created by Ivan B.
 
 protocol AuthSceneOutput {
     func authenticate()

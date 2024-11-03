@@ -1,9 +1,5 @@
-//
-//  UserAccount.swift
-//  Let's Go
-//
-//  Created by Vanya Bogdantsev on 04.09.2023.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import Appwrite
 // not final

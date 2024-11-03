@@ -1,9 +1,5 @@
-//
-//  UIColor.swift
-//  
-//
-//  Created by Vanya Bogdantsev on 20.08.2023.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import CoreGraphics
 import UIKit

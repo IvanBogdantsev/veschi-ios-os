@@ -1,9 +1,5 @@
-//
-//  LoadingView.swift
-//  
-//
-//  Created by  Ivan B  on 16.05.23.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import SnapKit
 import UIKit

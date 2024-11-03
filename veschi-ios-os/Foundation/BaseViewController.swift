@@ -1,9 +1,5 @@
-//
-//  File.swift
 //  veschi-ios-os
-//
-//  Created by Vanya Bogdantsev on 01.11.2024.
-//
+//  Created by Ivan B.
 
 import RxSwift
 import UIKit

@@ -1,9 +1,5 @@
-//
-//  SceneDelegate.swift
 //  veschi-ios-os
-//
-//  Created by Vanya Bogdantsev on 12.10.2024.
-//
+//  Created by Ivan B.
 
 import UIKit
 // swiftlint:disable:next final_class

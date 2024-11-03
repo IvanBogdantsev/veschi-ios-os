@@ -1,9 +1,5 @@
-//
-//  Observable.swift
-//  
-//
-//  Created by Vanya Bogdantsev on 09.09.2023.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import RxSwift
 

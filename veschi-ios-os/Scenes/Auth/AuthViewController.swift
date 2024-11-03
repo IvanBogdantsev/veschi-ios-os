@@ -1,10 +1,5 @@
-//
-//  AuthViewController.swift
-//
-//
-//  Created by  Ivan B  on 27.05.22.
-//
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import UIKit
 
