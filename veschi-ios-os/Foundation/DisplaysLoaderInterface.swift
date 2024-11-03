@@ -16,7 +16,6 @@ extension DisplaysLoaderInterface where Self: UIViewController {
     func displayLoader() {
         let loadingView = view?.findSubview(ofType: LoadingView.self) ?? LoadingView()
         if !view.subviews.contains(loadingView) {
-            loadingView.hide(animated: false)
             view.addSubview(loadingView)
             loadingView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()

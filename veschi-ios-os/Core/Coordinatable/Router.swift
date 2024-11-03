@@ -15,7 +15,7 @@ final class Router {
     
     var rootController: BaseNavigationController
     
-    required init(rootController: BaseNavigationController = .init()) {
+    required init(rootController: BaseNavigationController) {
         self.rootController = rootController
     }
     
@@ -28,8 +28,6 @@ final class Router {
     }
     
     func hideBottomBarAndPush(_ controller: UIViewController, animated: Bool) {
-        guard !(controller is UINavigationController) else
-        { assertionFailure("⚠️Deprecated push UINavigationController."); return }
         controller.hidesBottomBarWhenPushed = true
         rootController.pushViewController(controller, animated: animated)
     }

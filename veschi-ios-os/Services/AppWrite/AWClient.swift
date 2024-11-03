@@ -6,7 +6,8 @@
 //
 
 import Appwrite
-
+// not final
+// swiftlint:disable:next final_class
 class AWClient {
     
     let client: Client

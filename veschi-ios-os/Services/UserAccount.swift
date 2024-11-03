@@ -21,11 +21,12 @@ final class UserAccount: AWAccount, UserAccountProtocol {
         self.database = database
     }
     // TODO: should return user
-    func create(email: String,
-                userID: String,
-                name: String? = nil) async throws
-    {
-        let _ = try await account.create(
+    func create(
+        email: String,
+        userID: String,
+        name: String? = nil
+    ) async throws {
+        _ = try await account.create(
             userId: userID,
             email: email,
             password: userID,
@@ -38,7 +39,7 @@ final class UserAccount: AWAccount, UserAccountProtocol {
     }
     
     func deleteSession() async throws {
-        let _ = try await account.deleteSessions()
+        _ = try await account.deleteSessions()
     }
     
 }

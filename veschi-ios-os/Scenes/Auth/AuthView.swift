@@ -7,8 +7,12 @@
 
 final class AuthView: BaseView {
     
-    override func layout() {}
+    override func layout() {
+        
+    }
     
-    override func setStyles() {}
+    override func setStyles() {
+        
+    }
     
 }

@@ -5,7 +5,7 @@
 //  Created by Vanya Bogdantsev on 20.08.2023.
 //
 
-import UIKit.UIColor
+import UIKit
 
 enum Colors {
     static let background = UIColor.systemBackground

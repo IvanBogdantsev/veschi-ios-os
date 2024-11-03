@@ -8,8 +8,9 @@
 
 import UIKit
 
-final class AuthViewController: UIViewController {
+final class AuthViewController: BaseViewController {
     
+    private let contentView = AuthView()
     private let viewModel: AuthViewModelProtocol
     
     init(viewModel: AuthViewModelProtocol) {
@@ -21,8 +22,8 @@ final class AuthViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        view = contentView
     }
     
 }

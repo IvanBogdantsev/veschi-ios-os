@@ -5,7 +5,7 @@
 //  Created by Vanya Bogdantsev on 20.08.2023.
 //
 
-import UIKit.UIFont
+import UIKit
 
 enum Fonts {
     /// 13 regular

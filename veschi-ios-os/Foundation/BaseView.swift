@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+// not final
+// swiftlint:disable:next final_class
 class BaseView: UIView {
     
     init() {
@@ -20,6 +21,7 @@ class BaseView: UIView {
     }
     
     func layout() {}
+    
     func setStyles() {}
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SplashViewController: UIViewController {
+final class SplashViewController: BaseViewController {
     
     private let label = Labels.logoTitle(text: "\(Strings.veschi) \(Emojis.package)")
     

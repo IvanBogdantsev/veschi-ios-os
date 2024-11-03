@@ -5,18 +5,12 @@
 //  Created by  Ivan B  on 16.05.23.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 final class LoadingView: UIView {
     
-    private(set) lazy var activityIndicatorView: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(frame: .zero)
-        view.style = UIActivityIndicatorView.Style.large
-        view.startAnimating()
-        view.hidesWhenStopped = true
-        return view
-    }()
+    var activityIndicatorView = UIActivityIndicatorView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,6 +23,8 @@ final class LoadingView: UIView {
     
     private func setup() {
         backgroundColor = .red.withAlphaComponent(0.1)
+        activityIndicatorView.style = .large
+        activityIndicatorView.hidesWhenStopped = true
         addSubview(activityIndicatorView)
         activityIndicatorView.snp.makeConstraints {
             $0.center.equalToSuperview()

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+// not final
+// swiftlint:disable:next final_class
 class BaseCoordinator: NSObject, Coordinatable {
     
     let router: Router
@@ -15,19 +16,15 @@ class BaseCoordinator: NSObject, Coordinatable {
     weak var parent: Coordinatable?
     
     init(router: Router) {
-        children = [Coordinatable]()
+        children = []
         self.router = router
         super.init()
-    }
-    
-    deinit {
-        children.removeAll()
     }
     
     func start() {}
     
     func add(_ child: Coordinatable) {
-        for element in children where  child === element {
+        for element in children where child === element {
             return
         }
         children.append(child)
@@ -39,6 +36,10 @@ class BaseCoordinator: NSObject, Coordinatable {
             children.remove(at: index)
             break
         }
+    }
+    
+    deinit {
+        children.removeAll()
     }
     
 }
