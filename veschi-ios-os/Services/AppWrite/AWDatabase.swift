@@ -3,7 +3,7 @@
 
 import Appwrite
 import Foundation
-// TODO: update headers
+
 protocol DatabaseProtocol {
     func getItems<T: Codable>(of type: T.Type, from collection: AWCollection, queries: [String]?) async throws -> [T]
     func getItem<T: Codable>(of type: T.Type, from collection: AWCollection, id: String, queries: [String]?) async throws -> T
