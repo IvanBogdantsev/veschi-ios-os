@@ -1,12 +1,14 @@
 //  veschi-ios-os
 //  Created by Ivan B.
 
+import RxSwift
+
 protocol AuthViewModelInputs {
-    
+    func countryCodeButtonTapped()
 }
 
 protocol AuthViewModelOutputs {
-    
+    //    var eventName: Observable<String>! { get }
 }
 
 protocol AuthViewModelProtocol {
@@ -19,6 +21,8 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     var inputs: AuthViewModelInputs { self }
     var outputs: AuthViewModelOutputs { self }
     
+    //    var eventName: Observable<String>!
+    
     private let userAccount: UserAccountProtocol
     
     init(userAccount: UserAccountProtocol) {
@@ -28,5 +32,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
 }
 
 extension AuthViewModel: AuthViewModelInputs {
-    
+    func countryCodeButtonTapped() {
+        
+    }
 }

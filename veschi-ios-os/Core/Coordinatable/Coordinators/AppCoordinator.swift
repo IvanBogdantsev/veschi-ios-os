@@ -17,6 +17,11 @@ final class AppCoordinator: BaseCoordinator {
     
     override func start() {
         router.setRootModule(SplashViewController())
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let authCoordinator = AuthCoordinator(router: self.router)
+            self.add(authCoordinator)
+            authCoordinator.start()
+        }
     }
     
 }

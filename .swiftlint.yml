@@ -2,6 +2,7 @@
 # rules may be disabled with swiftlint:disable:next/this/previous rule_name
 disabled_rules:
 - trailing_whitespace
+- private_over_fileprivate
 
 opt_in_rules:
 - array_init

@@ -5,8 +5,7 @@ import UIKit
 
 enum Labels {
     static func logoTitle(text: String? = nil) -> UILabel {
-        let label = UILabel()
-        label.setup(
+        return UILabel(
             text: text,
             multiline: false,
             font: Fonts.logoTitle,
@@ -14,12 +13,11 @@ enum Labels {
             centered: true,
             adjustsFontSizeToFitWidth: true
         )
-        return label
     }
 }
 
 fileprivate extension UILabel {
-    func setup(
+    convenience init(
         text: String?,
         multiline: Bool,
         font: UIFont,
@@ -27,6 +25,7 @@ fileprivate extension UILabel {
         centered: Bool,
         adjustsFontSizeToFitWidth: Bool
     ) {
+        self.init()
         self.text = text
         self.numberOfLines = multiline ? 0 : 1
         self.font = font
