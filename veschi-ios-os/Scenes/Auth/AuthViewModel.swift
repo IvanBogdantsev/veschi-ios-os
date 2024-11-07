@@ -4,11 +4,13 @@
 import RxSwift
 
 protocol AuthViewModelInputs {
+    func viewDidLoad()
     func countryCodeButtonTapped()
 }
 
 protocol AuthViewModelOutputs {
-    //    var eventName: Observable<String>! { get }
+    var showCountryCodeLoading: Observable<Void>! { get }
+    var presentCountryCodesList: Observable<Void>! { get }
 }
 
 protocol AuthViewModelProtocol {
@@ -21,18 +23,29 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     var inputs: AuthViewModelInputs { self }
     var outputs: AuthViewModelOutputs { self }
     
-    //    var eventName: Observable<String>!
+    var showCountryCodeLoading: Observable<Void>!
+    var presentCountryCodesList: Observable<Void>!
+    
+    private let viewDidLoadValue = PublishSubject<Void>()
+    private let presentCountryCodesListValue = PublishSubject<Void>()
     
     private let userAccount: UserAccountProtocol
     
     init(userAccount: UserAccountProtocol) {
         self.userAccount = userAccount
+        
+        showCountryCodeLoading = viewDidLoadValue
+        presentCountryCodesList = presentCountryCodesListValue
     }
     
 }
 
 extension AuthViewModel: AuthViewModelInputs {
+    func viewDidLoad() {
+        viewDidLoadValue.onNext(Void())
+    }
+    
     func countryCodeButtonTapped() {
-        
+        presentCountryCodesListValue.onNext(Void())
     }
 }
