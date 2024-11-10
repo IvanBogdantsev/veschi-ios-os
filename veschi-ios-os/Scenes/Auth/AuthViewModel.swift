@@ -30,12 +30,21 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     private let presentCountryCodesListValue = PublishSubject<Void>()
     
     private let userAccount: UserAccountProtocol
+    private let database: DatabaseProtocol
     
-    init(userAccount: UserAccountProtocol) {
+    init(userAccount: UserAccountProtocol, database: DatabaseProtocol) {
         self.userAccount = userAccount
+        self.database = database
         
         showCountryCodeLoading = viewDidLoadValue
         presentCountryCodesList = presentCountryCodesListValue
+        
+        let countryTelephoneCodes = viewDidLoadValue
+            .flatMapLatest {
+                Observable<[CountryTelephoneCode]>.createAsync {
+                    try await database.getItems(of: CountryTelephoneCode.self, from: .countryTelephoneCodes)
+                }
+            }
     }
     
 }

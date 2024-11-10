@@ -2,6 +2,7 @@
 //  Created by Ivan B.
 
 import RxCocoa
+import SkeletonView
 import UIKit
 
 final class AuthViewController: BaseViewController {
@@ -37,7 +38,7 @@ final class AuthViewController: BaseViewController {
         viewModel.outputs.showCountryCodeLoading
             .subscribe(
                 onNext: { [weak self] in
-                    
+                    self?.contentView.countryCodeButton.showLoading(titleFillPercent: 33)
                 }
             )
             .disposed(by: disposeBag)

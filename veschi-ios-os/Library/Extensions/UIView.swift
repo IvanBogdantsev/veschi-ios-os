@@ -1,6 +1,7 @@
 //  veschi-ios-os
 //  Created by Ivan B.
 
+import SkeletonView
 import UIKit
 
 extension UIView {
@@ -44,5 +45,14 @@ extension UIView {
     
     func addSubviews(_ subviews: UIView...) {
         subviews.forEach { addSubview($0) }
+    }
+    
+    func veschi_skeleton_showAnimatedGradient() {
+        if !isSkeletonable { isSkeletonable.toggle() }
+        showAnimatedGradientSkeleton(
+            usingGradient: SkeletonGradient(colors: Colors.skeletonAnimatedGradientSequence),
+            animation: SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight),
+            transition: .crossDissolve(AnimationDuration.zeroPointThreeSecond)
+        )
     }
 }

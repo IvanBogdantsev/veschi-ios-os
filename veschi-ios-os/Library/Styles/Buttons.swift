@@ -1,6 +1,7 @@
 // veschi-ios-os
 // Created by Ivan B.
 
+import SnapKit
 import UIKit
 
 enum Buttons {
