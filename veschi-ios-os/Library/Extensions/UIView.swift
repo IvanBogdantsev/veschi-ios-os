@@ -55,4 +55,8 @@ extension UIView {
             transition: .crossDissolve(AnimationDuration.zeroPointThreeSecond)
         )
     }
+    
+    func veschi_skeleton_hideSkeleton() {
+        hideSkeleton(transition: .crossDissolve(AnimationDuration.zeroPointThreeSecond))
+    }
 }

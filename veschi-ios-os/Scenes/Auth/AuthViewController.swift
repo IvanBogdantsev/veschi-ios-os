@@ -47,7 +47,7 @@ final class AuthViewController: BaseViewController {
             .observeOnMainThread()
             .subscribe(
                 onNext: { [weak self] in
-                    self?.contentView.countryCodeButton.hideSkeleton()
+                    self?.contentView.countryCodeButton.veschi_skeleton_hideSkeleton()
                 }
             )
             .disposed(by: disposeBag)
