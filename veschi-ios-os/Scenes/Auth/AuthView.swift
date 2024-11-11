@@ -5,20 +5,28 @@ import UIKit
 
 final class AuthView: BaseView {
     
+    let stackView = UIStackView(axis: .vertical, spacing: DesignConfiguration.stackViewVerticalSpacing)
     let countryCodeButton = Buttons.leftAligned()
+    let telephoneNumberTextField = TextFields.telephoneEntry()
     
     override func layout() {
-        addSubviews(countryCodeButton)
+        addSubviews(stackView)
+        stackView.addArrangedSubviews(countryCodeButton, telephoneNumberTextField)
         
-        countryCodeButton.snp.makeConstraints { make in
+        stackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(DesignConfiguration.principalActionButtonHeight)
             make.width.equalToSuperview().multipliedBy(DesignConfiguration.fullWidthControlElementScreenPercentage)
+        }
+        countryCodeButton.snp.makeConstraints { make in
+            make.height.equalTo(DesignConfiguration.principalActionButtonHeight)
+        }
+        telephoneNumberTextField.snp.makeConstraints { make in
+            make.height.equalTo(DesignConfiguration.textFieldHeight)
         }
     }
     
     override func setStyles() {
-        backgroundColor = Colors.background
+        super.setStyles()
     }
     
 }

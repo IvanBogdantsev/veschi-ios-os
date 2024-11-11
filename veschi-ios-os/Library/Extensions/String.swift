@@ -5,9 +5,8 @@ import Foundation
 
 extension String {
     var asEmojiFlag: String {
-        guard Locale.Region.isoRegions.map(\.identifier).contains(self) else {
-            // TODO: do i need debug print? 
-            debugPrint("Unknown region: \(self)")
+        guard Locale.Region.isoRegions.contains(where: { self == $0.identifier }) else {
+            print("Unknown region: \(self)")
             return self
         }
         return self

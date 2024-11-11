@@ -10,10 +10,10 @@ enum Buttons {
             title: title,
             titleColor: Colors.text,
             backgroundColor: Colors.background,
-            cornerRadius: DesignConfiguration.cornerRadius,
+            cornerRadius: DesignConfiguration.controlElementsCornerRadius,
             borderWidth: DesignConfiguration.borderWidth,
-            borderColor: Colors.separator,
-            font: Fonts.headline
+            borderColor: Colors.accent,
+            font: Fonts.body
         )
         button.titleLabel?.snp.makeConstraints { make in make.left.right.equalToSuperview().inset(DesignConfiguration.buttonInternalElementsSideInset)
         }

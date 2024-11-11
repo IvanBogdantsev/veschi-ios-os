@@ -7,9 +7,11 @@ final class BaseNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateNavigationBarAppearance()
+        setNavigationBarAppearance()
     }
     
-    private func updateNavigationBarAppearance() {}
+    private func setNavigationBarAppearance() {
+        navigationBar.tintColor = Colors.accent
+    }
     
 }

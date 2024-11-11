@@ -8,7 +8,7 @@ import UIKit
 final class AuthViewController: BaseViewController {
     
     private let contentView = AuthView()
-    private let countryCodesNavigationController = UINavigationController()
+    private let countryCodesNavigationController = BaseNavigationController()
     private let countryCodesTableViewController = CountryCodesSearchTableViewController()
     private let viewModel: AuthViewModelProtocol
     
@@ -38,6 +38,7 @@ final class AuthViewController: BaseViewController {
         viewModel.outputs.showCountryCodeLoading
             .subscribe(
                 onNext: { [weak self] in
+                    self?.contentView.countryCodeButton.isUserInteractionEnabled = false
                     self?.contentView.countryCodeButton.showLoading(titleFillPercent: 33)
                 }
             )
@@ -48,6 +49,7 @@ final class AuthViewController: BaseViewController {
             .subscribe(
                 onNext: { [weak self] in
                     self?.contentView.countryCodeButton.veschi_skeleton_hideSkeleton()
+                    self?.contentView.countryCodeButton.isUserInteractionEnabled = true
                 }
             )
             .disposed(by: disposeBag)
@@ -66,6 +68,9 @@ final class AuthViewController: BaseViewController {
             .subscribe(
                 onNext: { [weak self] text in
                     self?.contentView.countryCodeButton.setTitle(text, for: .normal)
+                },
+                onError: { error in
+                    print(error)
                 }
             )
             .disposed(by: disposeBag)

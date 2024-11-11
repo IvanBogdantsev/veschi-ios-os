@@ -18,6 +18,8 @@ class BaseView: UIView {
     
     func layout() {}
     
-    func setStyles() {}
+    func setStyles() {
+        backgroundColor = Colors.background
+    }
     
 }
