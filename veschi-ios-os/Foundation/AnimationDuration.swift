@@ -16,6 +16,12 @@ enum AnimationDuration {
     static let zeroPointFiveSecond: TimeInterval = 0.5
     /// 0.6 sec
     static let zeroPointSixSecond: TimeInterval = 0.6
+    /// 0.7 sec
+    static let zeroPointSevenSecond: TimeInterval = 0.7
+    /// 0.8 sec
+    static let zeroPointEightSecond: TimeInterval = 0.8
+    /// 0.9 sec
+    static let zeroPointNineSecond: TimeInterval = 0.9
     ///  1 sec
     static let oneSecond: TimeInterval = 1
 }

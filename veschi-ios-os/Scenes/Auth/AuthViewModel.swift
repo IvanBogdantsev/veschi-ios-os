@@ -10,6 +10,8 @@ protocol AuthViewModelInputs {
 
 protocol AuthViewModelOutputs {
     var showCountryCodeLoading: Observable<Void>! { get }
+    var hideCountryCodeLoading: Observable<Void>! { get }
+    var countryCodeButtonText: Observable<String>! { get }
     var presentCountryCodesList: Observable<Void>! { get }
 }
 
@@ -24,6 +26,8 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     var outputs: AuthViewModelOutputs { self }
     
     var showCountryCodeLoading: Observable<Void>!
+    var hideCountryCodeLoading: Observable<Void>!
+    var countryCodeButtonText: Observable<String>!
     var presentCountryCodesList: Observable<Void>!
     
     private let viewDidLoadValue = PublishSubject<Void>()
@@ -45,8 +49,35 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
                     try await database.getItems(of: CountryTelephoneCode.self, from: .countryTelephoneCodes)
                 }
             }
+            .share()
+        
+        let supposedUserCountryCode = countryTelephoneCodes
+            .map { countryTelephoneCodes in
+                return self.getSupposedUserCountryCode(from: countryTelephoneCodes)
+            }
+        
+        hideCountryCodeLoading = countryTelephoneCodes.ignoreValues()
+        
+        countryCodeButtonText = supposedUserCountryCode
+            .map { supposedCode in
+                return self.formatCountryCodeButtonText(for: supposedCode)
+            }
     }
     
+}
+
+extension AuthViewModel {
+    private func getSupposedUserCountryCode(from codes: [CountryTelephoneCode]) -> CountryTelephoneCode {
+        if let region = Environment.locale.region?.identifier,
+           let codeByRegion = codes.first(where: { $0.countryCode == region }) {
+            return codeByRegion
+        }
+        return codes.sorted { $0.callingCode < $1.callingCode }[0]
+    }
+    
+    private func formatCountryCodeButtonText(for code: CountryTelephoneCode) -> String {
+        return "\(code.countryCode.asEmojiFlag) \(code.countryName) +\(code.callingCode)"
+    }
 }
 
 extension AuthViewModel: AuthViewModelInputs {

@@ -43,11 +43,29 @@ final class AuthViewController: BaseViewController {
             )
             .disposed(by: disposeBag)
         
+        viewModel.outputs.hideCountryCodeLoading
+            .observeOnMainThread()
+            .subscribe(
+                onNext: { [weak self] in
+                    self?.contentView.countryCodeButton.hideSkeleton()
+                }
+            )
+            .disposed(by: disposeBag)
+        
         viewModel.outputs.presentCountryCodesList
             .subscribe(
                 onNext: { [weak self] in
                     guard let self else { return }
                     self.present(self.countryCodesNavigationController, animated: true)
+                }
+            )
+            .disposed(by: disposeBag)
+        
+        viewModel.outputs.countryCodeButtonText
+            .observeOnMainThread()
+            .subscribe(
+                onNext: { [weak self] text in
+                    self?.contentView.countryCodeButton.setTitle(text, for: .normal)
                 }
             )
             .disposed(by: disposeBag)

@@ -22,7 +22,7 @@ protocol DatabaseProtocol {
     func update(item: Codable, in collection: AWCollection, id: String) async throws
     func deleteItem(from collection: AWCollection, with id: String) async throws
 }
-
+// swiftlint:disable:next file_types_order
 extension DatabaseProtocol {
     func getItems<T: Codable>(
         of type: T.Type,
