@@ -32,6 +32,8 @@ final class AuthViewController: BaseViewController {
     
     override func basicSetup() {
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapContentView))
+        view.addGestureRecognizer(tapGesture)
     }
     
     override func bindViewModel() {
@@ -84,6 +86,11 @@ final class AuthViewController: BaseViewController {
                 }
             )
             .disposed(by: disposeBag)
+    }
+    
+    @objc
+    private func didTapContentView() {
+        contentView.endEditing(true)
     }
     
 }
