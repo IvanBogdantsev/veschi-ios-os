@@ -6,6 +6,7 @@ import RxSwift
 protocol AuthViewModelInputs {
     func viewDidLoad()
     func countryCodeButtonTapped()
+    func phoneNumberChanged(_ phoneNumber: String)
 }
 
 protocol AuthViewModelOutputs {
@@ -13,6 +14,7 @@ protocol AuthViewModelOutputs {
     var hideCountryCodeLoading: Observable<Void>! { get }
     var countryCodeButtonText: Observable<String>! { get }
     var presentCountryCodesList: Observable<Void>! { get }
+    var formIsValid: Observable<Bool>! { get }
 }
 
 protocol AuthViewModelProtocol {
@@ -29,17 +31,17 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     var hideCountryCodeLoading: Observable<Void>!
     var countryCodeButtonText: Observable<String>!
     var presentCountryCodesList: Observable<Void>!
+    var formIsValid: Observable<Bool>!
     
     private let viewDidLoadValue = PublishSubject<Void>()
     private let presentCountryCodesListValue = PublishSubject<Void>()
+    private let phoneNumberChangedValue = PublishSubject<String>()
     
-    private let userAccount: UserAccountProtocol
-    private let database: DatabaseProtocol
-    
-    init(userAccount: UserAccountProtocol, database: DatabaseProtocol) {
-        self.userAccount = userAccount
-        self.database = database
-        
+    init(
+        userAccount: UserAccountProtocol,
+        database: DatabaseProtocol,
+        phoneNumberValidator: PhoneNumberValidatorProtocol
+    ) {
         showCountryCodeLoading = viewDidLoadValue
         presentCountryCodesList = presentCountryCodesListValue
         
@@ -61,6 +63,11 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
         countryCodeButtonText = supposedUserCountryCode
             .map { supposedCode in
                 return self.formatCountryCodeButtonText(for: supposedCode)
+            }
+        
+        formIsValid = phoneNumberChangedValue
+            .map { phoneNumber in
+                return phoneNumberValidator.isValidPhoneNumber(phoneNumber)
             }
     }
     
@@ -87,5 +94,9 @@ extension AuthViewModel: AuthViewModelInputs {
     
     func countryCodeButtonTapped() {
         presentCountryCodesListValue.onNext(Void())
+    }
+    
+    func phoneNumberChanged(_ phoneNumber: String) {
+        phoneNumberChangedValue.onNext(phoneNumber)
     }
 }

@@ -1,6 +1,7 @@
 //  veschi-ios-os
 //  Created by Ivan B.
 
+import PhoneNumberKit
 import RxCocoa
 import SkeletonView
 import UIKit
@@ -10,6 +11,7 @@ final class AuthViewController: BaseViewController {
     private let contentView = AuthView()
     private let countryCodesNavigationController = BaseNavigationController()
     private let countryCodesTableViewController = CountryCodesSearchTableViewController()
+    private let partialPhoneNumberFormatter = PartialFormatter()
     private let viewModel: AuthViewModelProtocol
     
     init(viewModel: AuthViewModelProtocol) {
@@ -34,6 +36,7 @@ final class AuthViewController: BaseViewController {
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapContentView))
         view.addGestureRecognizer(tapGesture)
+        contentView.telephoneNumberTextField.delegate = self
     }
     
     override func bindViewModel() {
@@ -76,6 +79,14 @@ final class AuthViewController: BaseViewController {
                 }
             )
             .disposed(by: disposeBag)
+        
+        viewModel.outputs.formIsValid
+            .subscribe(
+                onNext: { isValid in
+                    print(isValid)
+                }
+            )
+            .disposed(by: disposeBag)
     }
     
     override func bindActions() {
@@ -93,4 +104,19 @@ final class AuthViewController: BaseViewController {
         contentView.endEditing(true)
     }
     
+}
+
+extension AuthViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        if let currentText = textField.text as? NSString {
+            let newText = currentText.replacingCharacters(in: range, with: string)
+            textField.text = partialPhoneNumberFormatter.formatPartial(newText)
+            viewModel.inputs.phoneNumberChanged(newText)
+        }
+        return false
+    }
 }

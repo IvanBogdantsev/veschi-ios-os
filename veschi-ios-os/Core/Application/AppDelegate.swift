@@ -3,7 +3,7 @@
 
 import FirebaseCore
 import UIKit
-
+// TODO: check DSYMs files status (crashlyitcs)
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate { // swiftlint:disable:this final_class
     
