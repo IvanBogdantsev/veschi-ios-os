@@ -14,6 +14,7 @@ protocol AuthViewModelOutputs {
     var hideCountryCodeLoading: Observable<Void>! { get }
     var countryCodeButtonText: Observable<String>! { get }
     var presentCountryCodesList: Observable<Void>! { get }
+    var formattedPhoneNumber: Observable<String>! { get }
     var formIsValid: Observable<Bool>! { get }
 }
 
@@ -31,6 +32,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     var hideCountryCodeLoading: Observable<Void>!
     var countryCodeButtonText: Observable<String>!
     var presentCountryCodesList: Observable<Void>!
+    var formattedPhoneNumber: Observable<String>!
     var formIsValid: Observable<Bool>!
     
     private let viewDidLoadValue = PublishSubject<Void>()
@@ -40,7 +42,8 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     init(
         userAccount: UserAccountProtocol,
         database: DatabaseProtocol,
-        phoneNumberValidator: PhoneNumberValidatorProtocol
+        phoneNumberValidator: PhoneNumberValidatorProtocol,
+        phoneFormatter: PhoneFormatterProtocol
     ) {
         showCountryCodeLoading = viewDidLoadValue
         presentCountryCodesList = presentCountryCodesListValue
@@ -53,17 +56,33 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
             }
             .share()
         
-        let supposedUserCountryCode = countryTelephoneCodes
-            .map { countryTelephoneCodes in
-                return self.getSupposedUserCountryCode(from: countryTelephoneCodes)
-            }
-        
         hideCountryCodeLoading = countryTelephoneCodes.ignoreValues()
         
-        countryCodeButtonText = supposedUserCountryCode
-            .map { supposedCode in
-                return self.formatCountryCodeButtonText(for: supposedCode)
+        let supposedUserCountryText = countryTelephoneCodes
+            .map { countryTelephoneCodes in
+                let supposedUserCountryText = self.getSupposedUserCountryCode(from: countryTelephoneCodes)
+                return self.formatCountryCodeButtonText(for: supposedUserCountryText)
             }
+        
+        formattedPhoneNumber = phoneNumberChangedValue
+            .map { phoneNumber in
+                return phoneFormatter.formatPartial(phoneNumber)
+            }
+        
+        let currentCountryText = formattedPhoneNumber
+            .withLatestFrom(countryTelephoneCodes) { $1 }
+            .map { countryTelephoneCodes in
+                let currentCountryCode = phoneFormatter.currentCountry
+                if let currentCode = countryTelephoneCodes.first(
+                    where: { $0.countryCode == currentCountryCode }
+                ) {
+                    return self.formatCountryCodeButtonText(for: currentCode)
+                } else {
+                    return "\(Emojis.whiteFlag) "
+                }
+            }
+        
+        countryCodeButtonText = Observable.merge(supposedUserCountryText, currentCountryText)
         
         formIsValid = phoneNumberChangedValue
             .map { phoneNumber in

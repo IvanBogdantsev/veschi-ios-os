@@ -1,7 +1,6 @@
 //  veschi-ios-os
 //  Created by Ivan B.
 
-import PhoneNumberKit
 import RxCocoa
 import SkeletonView
 import UIKit
@@ -11,7 +10,6 @@ final class AuthViewController: BaseViewController {
     private let contentView = AuthView()
     private let countryCodesNavigationController = BaseNavigationController()
     private let countryCodesTableViewController = CountryCodesSearchTableViewController()
-    private let partialPhoneNumberFormatter = PartialFormatter()
     private let viewModel: AuthViewModelProtocol
     
     init(viewModel: AuthViewModelProtocol) {
@@ -80,6 +78,14 @@ final class AuthViewController: BaseViewController {
             )
             .disposed(by: disposeBag)
         
+        viewModel.outputs.formattedPhoneNumber
+            .subscribe(
+                onNext: { [weak self] phoneNumber in
+                    self?.contentView.telephoneNumberTextField.text = phoneNumber
+                }
+            )
+            .disposed(by: disposeBag)
+        
         viewModel.outputs.formIsValid
             .subscribe(
                 onNext: { isValid in
@@ -114,7 +120,6 @@ extension AuthViewController: UITextFieldDelegate {
     ) -> Bool {
         if let currentText = textField.text as? NSString {
             let newText = currentText.replacingCharacters(in: range, with: string)
-            textField.text = partialPhoneNumberFormatter.formatPartial(newText)
             viewModel.inputs.phoneNumberChanged(newText)
         }
         return false
