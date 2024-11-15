@@ -44,7 +44,6 @@ extension DatabaseProtocol {
 
 enum AWCollection {
     case users
-    case countryTelephoneCodes
 }
 
 final class AWDatabase: AWClient, DatabaseProtocol {

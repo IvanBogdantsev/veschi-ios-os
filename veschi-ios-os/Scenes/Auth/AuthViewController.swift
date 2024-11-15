@@ -2,7 +2,6 @@
 //  Created by Ivan B.
 
 import RxCocoa
-import SkeletonView
 import UIKit
 
 final class AuthViewController: BaseViewController {
@@ -25,11 +24,6 @@ final class AuthViewController: BaseViewController {
         view = contentView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        viewModel.inputs.viewDidLoad()
-    }
-    
     override func basicSetup() {
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapContentView))
@@ -37,26 +31,7 @@ final class AuthViewController: BaseViewController {
         contentView.telephoneNumberTextField.delegate = self
     }
     
-    override func bindViewModel() {
-        viewModel.outputs.showCountryCodeLoading
-            .subscribe(
-                onNext: { [weak self] in
-                    self?.contentView.countryCodeButton.isUserInteractionEnabled = false
-                    self?.contentView.countryCodeButton.showLoading(titleFillPercent: 33)
-                }
-            )
-            .disposed(by: disposeBag)
-        
-        viewModel.outputs.hideCountryCodeLoading
-            .observeOnMainThread()
-            .subscribe(
-                onNext: { [weak self] in
-                    self?.contentView.countryCodeButton.veschi_skeleton_hideSkeleton()
-                    self?.contentView.countryCodeButton.isUserInteractionEnabled = true
-                }
-            )
-            .disposed(by: disposeBag)
-        
+    override func bindViewModel() {        
         viewModel.outputs.presentCountryCodesList
             .subscribe(
                 onNext: { [weak self] in
