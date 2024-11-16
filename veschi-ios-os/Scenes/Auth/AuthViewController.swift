@@ -36,7 +36,7 @@ final class AuthViewController: BaseViewController {
         contentView.telephoneNumberTextField.delegate = self
     }
     
-    override func bindViewModel() {        
+    override func bindViewModel() {
         viewModel.outputs.presentCountryCodesList
             .subscribe(
                 onNext: { [weak self] in

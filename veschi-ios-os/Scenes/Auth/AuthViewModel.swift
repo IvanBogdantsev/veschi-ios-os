@@ -57,26 +57,31 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
                 guard let dialingCode = phoneNumberUtility.dialingCode(
                     for: phoneNumberFormatter.currentCountry
                 ) else { return nil }
-                return "+\(dialingCode)"
-            }
-        
-        let supposedCountryText = viewDidLoadValue
-            .map { _ in
-                return self.getCountryInfoButtonText(by: phoneNumberFormatter.currentCountry)
+                return dialingCode
             }
         
         let formattedPhoneNumber = phoneNumberChangedValue
             .map { phoneNumber in
                 return phoneNumberFormatter.formatPartial(phoneNumber)
             }
+            .share()
         
-        let currentCountryText = phoneNumberChangedValue
-            .withLatestFrom(formattedPhoneNumber)
-            .map { _ in
-                return self.getCountryInfoButtonText(by: phoneNumberFormatter.currentCountry)
+        let currentISOCode = formattedPhoneNumber
+            .map { phoneNumber in
+                if let parsedISOCode = phoneNumberUtility.parse(phoneNumber)?.regionID {
+                    return parsedISOCode
+                }
+                return phoneNumberFormatter.currentCountry
             }
         
-        countryCodeButtonText = Observable.merge(supposedCountryText, currentCountryText)
+        let formattedButtonText = currentISOCode
+            .map { ISOCode in
+                let regionISOCodes = phoneNumberUtility.getRegionISOCodes(by: ISOCode)
+                return self.getCountryInfoButtonText(by: regionISOCodes)
+            }
+        
+        countryCodeButtonText = formattedButtonText
+            .startWith(getInitialButtonText())
         
         textFieldValue = Observable.merge(supposedCountryDialingCode, formattedPhoneNumber)
             .map { text in
@@ -92,14 +97,25 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
 }
 
 extension AuthViewModel {
+    private func getInitialButtonText() -> String {
+        let currentCountryISOCode = phoneNumberFormatter.currentCountry
+        let regionISOCodes = phoneNumberUtility.getRegionISOCodes(by: currentCountryISOCode)
+        return getCountryInfoButtonText(by: regionISOCodes)
+    }
+    
+    private func getCountryInfoButtonText(by ISOCodes: [String]) -> String {
+        guard let firstISOCode = ISOCodes.first else { return "" }
+        let mainCountryInfo = getCountryInfoButtonText(by: firstISOCode)
+        return ISOCodes.count > 1
+        ? "\(mainCountryInfo) \(Strings.and_num_more(num: ISOCodes.count - 1))"
+        : mainCountryInfo
+    }
+    
     private func getCountryInfoButtonText(by ISOCode: String) -> String {
         let countryName = Environment.locale.localizedString(
             forRegionCode: ISOCode
         ) ?? ""
-        let countryDialingCode = phoneNumberUtility.dialingCode(
-            for: ISOCode
-        ) ?? ""
-        return "\(ISOCode.asEmojiFlag) \(countryName) +\(countryDialingCode)"
+        return "\(ISOCode.asEmojiFlag) \(countryName)"
     }
 }
 

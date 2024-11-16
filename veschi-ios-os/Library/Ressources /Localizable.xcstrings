@@ -1,7 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-
+    "and_%d_more" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "and %d more"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "et %d autres"
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }

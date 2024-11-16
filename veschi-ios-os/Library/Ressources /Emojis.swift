@@ -3,5 +3,4 @@
 
 enum Emojis {
     static let package = "📦"
-    static let whiteFlag = "🏳️"
 }
