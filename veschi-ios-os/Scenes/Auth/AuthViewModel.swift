@@ -66,17 +66,14 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
             }
             .share()
         
-        let currentISOCode = formattedPhoneNumber
+        let formattedButtonText = formattedPhoneNumber
             .map { phoneNumber in
                 if let parsedISOCode = phoneNumberUtility.parse(phoneNumber)?.regionID {
-                    return parsedISOCode
+                    return self.getCountryInfoButtonText(by: parsedISOCode)
                 }
-                return phoneNumberFormatter.currentCountry
-            }
-        
-        let formattedButtonText = currentISOCode
-            .map { ISOCode in
-                let regionISOCodes = phoneNumberUtility.getRegionISOCodes(by: ISOCode)
+                let regionISOCodes = phoneNumberUtility.getRegionISOCodes(
+                    by: phoneNumberFormatter.currentCountry
+                )
                 return self.getCountryInfoButtonText(by: regionISOCodes)
             }
         
