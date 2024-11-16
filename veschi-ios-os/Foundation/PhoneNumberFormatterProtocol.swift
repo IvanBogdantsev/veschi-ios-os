@@ -3,13 +3,13 @@
 
 import PhoneNumberKit
 
-protocol PhoneFormatterProtocol {
+protocol PhoneNumberFormatterProtocol {
     var currentCountry: String { get }
     
     func formatPartial(_ rawNumber: String) -> String
 }
 
-extension PartialFormatter: PhoneFormatterProtocol {
+extension PartialFormatter: PhoneNumberFormatterProtocol {
     // in the name of wording 🙏
     var currentCountry: String {
         return currentRegion

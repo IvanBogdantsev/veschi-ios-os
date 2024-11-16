@@ -24,6 +24,11 @@ final class AuthViewController: BaseViewController {
         view = contentView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.inputs.viewDidLoad()
+    }
+    
     override func basicSetup() {
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapContentView))

@@ -7,7 +7,7 @@ final class AuthView: BaseView {
     
     let stackView = UIStackView(axis: .vertical, spacing: DesignConfiguration.stackViewVerticalSpacing)
     let countryCodeButton = Buttons.leftAligned()
-    let telephoneNumberTextField = TextFields.telephoneEntry()
+    let telephoneNumberTextField = TextFields.telephoneNumberEntry()
     
     override func layout() {
         addSubviews(stackView)

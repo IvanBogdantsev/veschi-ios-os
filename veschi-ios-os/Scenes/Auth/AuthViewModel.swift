@@ -4,6 +4,7 @@
 import RxSwift
 
 protocol AuthViewModelInputs {
+    func viewDidLoad()
     func countryCodeButtonTapped()
     func phoneNumberChanged(_ phoneNumber: String)
 }
@@ -22,72 +23,78 @@ protocol AuthViewModelProtocol {
 
 final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     
+    // MARK: I/0
     var inputs: AuthViewModelInputs { self }
     var outputs: AuthViewModelOutputs { self }
     
+    // MARK: Outputs
     var countryCodeButtonText: Observable<String>!
     var presentCountryCodesList: Observable<Void>!
     var formattedPhoneNumber: Observable<String>!
     var formIsValid: Observable<Bool>!
     
+    // MARK: Values
+    private let viewDidLoadValue = PublishSubject<Void>()
     private let presentCountryCodesListValue = PublishSubject<Void>()
     private let phoneNumberChangedValue = PublishSubject<String>()
     
+    // MARK: Services
+    private let phoneNumberUtility: PhoneNumberUtilityProtocol
+    private let phoneNumberFormatter: PhoneNumberFormatterProtocol
+    
     init(
-        phoneNumberValidator: PhoneNumberValidatorProtocol,
-        phoneFormatter: PhoneFormatterProtocol
+        phoneNumberUtility: PhoneNumberUtilityProtocol,
+        phoneNumberFormatter: PhoneNumberFormatterProtocol
     ) {
+        self.phoneNumberUtility = phoneNumberUtility
+        self.phoneNumberFormatter = phoneNumberFormatter
+        
         presentCountryCodesList = presentCountryCodesListValue
         
-        //        let supposedUserCountryText = countryTelephoneCodes
-        //            .map { countryTelephoneCodes in
-        //                let supposedUserCountryText = self.getSupposedUserCountryCode(from: countryTelephoneCodes)
-        //                return self.formatCountryCodeButtonText(for: supposedUserCountryText)
-        //            }
+        let supposedCountryText = viewDidLoadValue
+            .map { _ in
+                return self.getCountryInfoButtonText(by: Environment.locale.region?.identifier)
+            }
         
         formattedPhoneNumber = phoneNumberChangedValue
             .map { phoneNumber in
-                return phoneFormatter.formatPartial(phoneNumber)
+                return phoneNumberFormatter.formatPartial(phoneNumber)
             }
         
-        //        let currentCountryText = formattedPhoneNumber
-        //            .withLatestFrom(countryTelephoneCodes) { $1 }
-        //            .map { countryTelephoneCodes in
-        //                let currentCountryCode = phoneFormatter.currentCountry
-        //                if let currentCode = countryTelephoneCodes.first(
-        //                    where: { $0.countryCode == currentCountryCode }
-        //                ) {
-        //                    return self.formatCountryCodeButtonText(for: currentCode)
-        //                } else {
-        //                    return "\(Emojis.whiteFlag) "
-        //                }
-        //            }
+        let currentCountryText = phoneNumberChangedValue
+            .withLatestFrom(formattedPhoneNumber)
+            .map { _ in
+                return self.getCountryInfoButtonText(by: phoneNumberFormatter.currentCountry)
+            }
         
-        //        countryCodeButtonText = Observable.merge(supposedUserCountryText, currentCountryText)
+        countryCodeButtonText = Observable.merge(supposedCountryText, currentCountryText)
         
         formIsValid = phoneNumberChangedValue
             .map { phoneNumber in
-                return phoneNumberValidator.isValidPhoneNumber(phoneNumber)
+                return phoneNumberUtility.isValidPhoneNumber(phoneNumber)
             }
     }
     
 }
 
 extension AuthViewModel {
-    //    private func getSupposedUserCountryCode(from codes: [CountryTelephoneCode]) -> CountryTelephoneCode {
-    //        if let region = Environment.locale.region?.identifier,
-    //           let codeByRegion = codes.first(where: { $0.countryCode == region }) {
-    //            return codeByRegion
-    //        }
-    //        return codes.sorted { $0.callingCode < $1.callingCode }[0]
-    //    }
-    //    
-    //    private func formatCountryCodeButtonText(for code: CountryTelephoneCode) -> String {
-    //        return "\(code.countryCode.asEmojiFlag) \(code.countryName) +\(code.callingCode)"
-    //    }
+    private func getCountryInfoButtonText(by ISOCode: String?) -> String {
+        guard let ISOCode else { return Emojis.whiteFlag }
+        let countryName = Environment.locale.localizedString(
+            forRegionCode: ISOCode
+        ) ?? ""
+        let countryDialingCode = phoneNumberUtility.dialingCode(
+            for: ISOCode
+        ) ?? ""
+        return "\(ISOCode.asEmojiFlag) \(countryName) +\(countryDialingCode)"
+    }
 }
 
-extension AuthViewModel: AuthViewModelInputs {    
+extension AuthViewModel: AuthViewModelInputs {
+    func viewDidLoad() {
+        viewDidLoadValue.onNext(Void())
+    }
+    
     func countryCodeButtonTapped() {
         presentCountryCodesListValue.onNext(Void())
     }

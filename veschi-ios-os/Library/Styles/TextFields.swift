@@ -4,7 +4,7 @@
 import UIKit
 
 enum TextFields {
-    static func telephoneEntry() -> UITextField {
+    static func telephoneNumberEntry() -> UITextField {
         return BaseTextField(
             keyboardType: .phonePad,
             font: Fonts.body,
