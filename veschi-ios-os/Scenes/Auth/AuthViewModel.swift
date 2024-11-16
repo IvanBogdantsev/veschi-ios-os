@@ -1,6 +1,7 @@
 //  veschi-ios-os
 //  Created by Ivan B.
 
+import Foundation
 import RxSwift
 
 protocol AuthViewModelInputs {
@@ -12,7 +13,7 @@ protocol AuthViewModelInputs {
 protocol AuthViewModelOutputs {
     var countryCodeButtonText: Observable<String>! { get }
     var presentCountryCodesList: Observable<Void>! { get }
-    var formattedPhoneNumber: Observable<String>! { get }
+    var textFieldValue: Observable<String>! { get }
     var formIsValid: Observable<Bool>! { get }
 }
 
@@ -30,7 +31,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     // MARK: Outputs
     var countryCodeButtonText: Observable<String>!
     var presentCountryCodesList: Observable<Void>!
-    var formattedPhoneNumber: Observable<String>!
+    var textFieldValue: Observable<String>!
     var formIsValid: Observable<Bool>!
     
     // MARK: Values
@@ -51,12 +52,20 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
         
         presentCountryCodesList = presentCountryCodesListValue
         
-        let supposedCountryText = viewDidLoadValue
-            .map { _ in
-                return self.getCountryInfoButtonText(by: Environment.locale.region?.identifier)
+        let supposedCountryDialingCode: Observable<String> = viewDidLoadValue
+            .compactMap {
+                guard let dialingCode = phoneNumberUtility.dialingCode(
+                    for: phoneNumberFormatter.currentCountry
+                ) else { return nil }
+                return "+\(dialingCode)"
             }
         
-        formattedPhoneNumber = phoneNumberChangedValue
+        let supposedCountryText = viewDidLoadValue
+            .map { _ in
+                return self.getCountryInfoButtonText(by: phoneNumberFormatter.currentCountry)
+            }
+        
+        let formattedPhoneNumber = phoneNumberChangedValue
             .map { phoneNumber in
                 return phoneNumberFormatter.formatPartial(phoneNumber)
             }
@@ -69,6 +78,11 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
         
         countryCodeButtonText = Observable.merge(supposedCountryText, currentCountryText)
         
+        textFieldValue = Observable.merge(supposedCountryDialingCode, formattedPhoneNumber)
+            .map { text in
+                return "+\(text.trimmingCharacters(in: CharacterSet(charactersIn: "+")))"
+            }
+        
         formIsValid = phoneNumberChangedValue
             .map { phoneNumber in
                 return phoneNumberUtility.isValidPhoneNumber(phoneNumber)
@@ -78,8 +92,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
 }
 
 extension AuthViewModel {
-    private func getCountryInfoButtonText(by ISOCode: String?) -> String {
-        guard let ISOCode else { return Emojis.whiteFlag }
+    private func getCountryInfoButtonText(by ISOCode: String) -> String {
         let countryName = Environment.locale.localizedString(
             forRegionCode: ISOCode
         ) ?? ""

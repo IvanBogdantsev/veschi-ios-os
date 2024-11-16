@@ -58,7 +58,7 @@ final class AuthViewController: BaseViewController {
             )
             .disposed(by: disposeBag)
         
-        viewModel.outputs.formattedPhoneNumber
+        viewModel.outputs.textFieldValue
             .subscribe(
                 onNext: { [weak self] phoneNumber in
                     self?.contentView.telephoneNumberTextField.text = phoneNumber
