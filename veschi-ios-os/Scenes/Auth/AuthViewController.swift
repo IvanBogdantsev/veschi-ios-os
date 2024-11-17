@@ -83,6 +83,10 @@ final class AuthViewController: BaseViewController {
                 }
             )
             .disposed(by: disposeBag)
+        
+        countryCodesTableViewController.onSelection = { [weak self] country in
+            self?.countryCodesNavigationController.dismiss(animated: true)
+        }
     }
     
     @objc
