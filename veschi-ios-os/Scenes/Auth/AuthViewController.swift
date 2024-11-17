@@ -85,6 +85,7 @@ final class AuthViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         countryCodesTableViewController.onSelection = { [weak self] country in
+            self?.viewModel.inputs.didChooseCountryFromTable(country.ISOCode)
             self?.countryCodesNavigationController.dismiss(animated: true)
         }
     }

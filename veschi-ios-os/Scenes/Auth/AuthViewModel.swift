@@ -8,6 +8,7 @@ protocol AuthViewModelInputs {
     func viewDidLoad()
     func countryCodeButtonTapped()
     func phoneNumberChanged(_ phoneNumber: String)
+    func didChooseCountryFromTable(_ ISOCode: String)
 }
 
 protocol AuthViewModelOutputs {
@@ -38,6 +39,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     private let viewDidLoadValue = PublishSubject<Void>()
     private let presentCountryCodesListValue = PublishSubject<Void>()
     private let phoneNumberChangedValue = PublishSubject<String>()
+    private let didChooseCountryFromTableValue = PublishSubject<String>()
     
     // MARK: Services
     private let phoneNumberUtility: PhoneNumberUtilityProtocol
@@ -54,10 +56,12 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
         
         let supposedCountryDialingCode: Observable<String> = viewDidLoadValue
             .compactMap {
-                guard let dialingCode = phoneNumberUtility.dialingCode(
-                    for: phoneNumberFormatter.currentCountry
-                ) else { return nil }
-                return dialingCode
+                return self.getDialingCode(for: phoneNumberFormatter.currentCountry)
+            }
+        
+        let countryDialingCodeFromTable: Observable<String> = didChooseCountryFromTableValue
+            .compactMap { ISOCode in
+                return self.getDialingCode(for: ISOCode)
             }
         
         let formattedPhoneNumber = phoneNumberChangedValue
@@ -66,7 +70,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
             }
             .share()
         
-        let formattedButtonText = formattedPhoneNumber
+        let formattedFromNumberButtonText = formattedPhoneNumber
             .map { phoneNumber in
                 if let parsedISOCode = phoneNumberUtility.parse(phoneNumber)?.regionID {
                     return self.getCountryInfoButtonText(by: parsedISOCode)
@@ -77,13 +81,22 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
                 return self.getCountryInfoButtonText(by: regionISOCodes)
             }
         
-        countryCodeButtonText = formattedButtonText
+        let formattedFromISOCodeButtonText = didChooseCountryFromTableValue
+            .map { ISOCode in
+                return self.getCountryInfoButtonText(by: [ISOCode])
+            }
+        
+        countryCodeButtonText = Observable.merge(formattedFromISOCodeButtonText, formattedFromNumberButtonText)
             .startWith(getInitialButtonText())
         
-        textFieldValue = Observable.merge(supposedCountryDialingCode, formattedPhoneNumber)
-            .map { text in
-                return "+\(text.trimmingCharacters(in: CharacterSet(charactersIn: "+")))"
-            }
+        textFieldValue = Observable.merge(
+            supposedCountryDialingCode,
+            formattedPhoneNumber,
+            countryDialingCodeFromTable
+        )
+        .map { text in
+            return "+\(text.trimmingCharacters(in: CharacterSet(charactersIn: "+")))"
+        }
         
         formIsValid = phoneNumberChangedValue
             .map { phoneNumber in
@@ -94,6 +107,13 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
 }
 
 extension AuthViewModel {
+    private func getDialingCode(for ISOCode: String) -> String? {
+        guard let dialingCode = phoneNumberUtility.dialingCode(
+            for: ISOCode
+        ) else { return nil }
+        return dialingCode
+    }
+    
     private func getInitialButtonText() -> String {
         let currentCountryISOCode = phoneNumberFormatter.currentCountry
         let regionISOCodes = phoneNumberUtility.getRegionISOCodes(by: currentCountryISOCode)
@@ -127,5 +147,9 @@ extension AuthViewModel: AuthViewModelInputs {
     
     func phoneNumberChanged(_ phoneNumber: String) {
         phoneNumberChangedValue.onNext(phoneNumber)
+    }
+    
+    func didChooseCountryFromTable(_ ISOCode: String) {
+        didChooseCountryFromTableValue.onNext(ISOCode)
     }
 }
