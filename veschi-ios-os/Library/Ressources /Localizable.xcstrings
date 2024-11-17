@@ -17,6 +17,23 @@
           }
         }
       }
+    },
+    "search_for_countries_or_codes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search countries or codes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher des pays ou des indicatifs"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

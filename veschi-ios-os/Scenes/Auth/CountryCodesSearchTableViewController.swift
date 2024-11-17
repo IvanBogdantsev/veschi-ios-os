@@ -35,6 +35,11 @@ final class CountryCodesSearchTableViewController: UITableViewController {
             .sorted { $0.zone < $1.zone }
     }()
     
+    private var filteredDataSource: [(zone: String, countries: [CountryDialingCode])] = []
+    private var isSearching: Bool {
+        !(searchController.searchBar.text?.isEmpty ?? true)
+    }
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         setup()
@@ -54,48 +59,75 @@ final class CountryCodesSearchTableViewController: UITableViewController {
     
     private func setup() {
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.keyboardType = .asciiCapable
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             systemItem: .cancel,
             primaryAction: UIAction { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
             }
         )
-        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = Strings.search_for_countries_or_codes
         tableView.tintColor = Colors.accent
     }
 }
 
 extension CountryCodesSearchTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        groupedDataSource.count
+        isSearching ? filteredDataSource.count : groupedDataSource.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        groupedDataSource[section].countries.count
+        let source = isSearching ? filteredDataSource : groupedDataSource
+        return source[section].countries.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        groupedDataSource[section].zone
+        let source = isSearching ? filteredDataSource : groupedDataSource
+        return source[section].zone
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifier, for: indexPath)
-        let country = groupedDataSource[indexPath.section].countries[indexPath.row]
+        let source = isSearching ? filteredDataSource : groupedDataSource
+        let country = source[indexPath.section].countries[indexPath.row]
         cell.textLabel?.text = "\(country.ISOCode.asEmojiFlag) \(country.countryName) +\(country.dialingCode)"
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let country = groupedDataSource[indexPath.section].countries[indexPath.row]
+        let source = isSearching ? filteredDataSource : groupedDataSource
+        let country = source[indexPath.section].countries[indexPath.row]
         onSelection?(country)
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        groupedDataSource.map { $0.zone }
+        let source = isSearching ? filteredDataSource : groupedDataSource
+        return source.map { $0.zone }
     }
     
     override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         index
+    }
+}
+
+extension CountryCodesSearchTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text?.lowercased(), !query.isEmpty else {
+            filteredDataSource = []
+            tableView.reloadData()
+            return
+        }
+        filteredDataSource = groupedDataSource.compactMap { section in
+            let filteredCountries = section.countries.filter {
+                $0.countryName.lowercased().contains(query) ||
+                $0.ISOCode.lowercased().starts(with: query) ||
+                "\($0.dialingCode)".starts(with: query.trimmingCharacters(in: CharacterSet(charactersIn: "+")))
+            }
+            return filteredCountries.isEmpty ? nil : (section.zone, filteredCountries)
+        }
+        tableView.reloadData()
     }
 }
 
