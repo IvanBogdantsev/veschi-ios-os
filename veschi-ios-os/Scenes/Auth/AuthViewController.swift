@@ -30,9 +30,8 @@ final class AuthViewController: BaseViewController {
     }
     
     override func basicSetup() {
+        super.basicSetup()
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapContentView))
-        view.addGestureRecognizer(tapGesture)
         contentView.telephoneNumberTextField.delegate = self
     }
     
@@ -88,11 +87,6 @@ final class AuthViewController: BaseViewController {
             self?.viewModel.inputs.didChooseCountryFromTable(country.ISOCode)
             self?.countryCodesNavigationController.dismiss(animated: true)
         }
-    }
-    
-    @objc
-    private func didTapContentView() {
-        contentView.endEditing(true)
     }
     
 }

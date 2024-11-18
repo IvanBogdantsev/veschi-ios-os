@@ -7,6 +7,7 @@ import UIKit
 // swiftlint:disable:next final_class
 class BaseViewController: UIViewController {
     
+    let tapGestureRecognizer = UITapGestureRecognizer()
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -16,10 +17,20 @@ class BaseViewController: UIViewController {
         bindActions()
     }
     
-    func basicSetup() {}
+    func basicSetup() {
+        tapGestureRecognizer.addTarget(self, action: #selector(didTapContentView))
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
     
     func bindViewModel() {}
     
     func bindActions() {}
-        
+    
+}
+
+extension BaseViewController {
+    @objc
+    private func didTapContentView() {
+        view.endEditing(true)
+    }
 }
