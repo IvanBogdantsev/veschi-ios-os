@@ -10,7 +10,6 @@ enum TextFields {
             font: Fonts.body,
             textColor: Colors.text,
             backgroundColor: Colors.background,
-            accentColor: Colors.accent,
             cornerRadius: DesignConfiguration.controlElementsCornerRadius,
             borderWidth: DesignConfiguration.borderWidth,
             borderColor: Colors.border

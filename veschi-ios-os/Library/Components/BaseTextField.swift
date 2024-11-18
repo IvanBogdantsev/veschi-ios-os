@@ -6,7 +6,6 @@ import UIKit
 // swiftlint:disable:next final_class
 class BaseTextField: UITextField {
     
-    let borderColor: UIColor
     let textInsets = DesignConfiguration.textFieldTextInsets
     
     init(
@@ -17,12 +16,10 @@ class BaseTextField: UITextField {
         font: UIFont,
         textColor: UIColor,
         backgroundColor: UIColor,
-        accentColor: UIColor,
         cornerRadius: CGFloat = 0,
         borderWidth: CGFloat = 0,
         borderColor: UIColor = .clear
     ) {
-        self.borderColor = borderColor
         super.init(frame: .zero)
         self.keyboardType = keyboardType
         self.returnKeyType = returnKeyType
@@ -30,7 +27,6 @@ class BaseTextField: UITextField {
         self.font = font
         self.textColor = textColor
         self.backgroundColor = backgroundColor
-        self.tintColor = accentColor
         self.layer.cornerRadius = cornerRadius
         self.layer.borderWidth = borderWidth
         self.layer.borderColor = borderColor.cgColor
@@ -41,7 +37,6 @@ class BaseTextField: UITextField {
             ]
             self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
         }
-        
         setup()
     }
     
@@ -61,23 +56,6 @@ class BaseTextField: UITextField {
         return bounds.inset(by: textInsets)
     }
     
-    func setup() {
-        addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
-        addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
-    }
-    
-    @objc
-    private func didBeginEditing() {
-        UIView.animate(withDuration: AnimationDuration.zeroPointTwoSecond) {
-            self.layer.borderColor = self.tintColor.cgColor
-        }
-    }
-    
-    @objc
-    private func didEndEditing() {
-        UIView.animate(withDuration: AnimationDuration.zeroPointOneSecond) {
-            self.layer.borderColor = self.borderColor.cgColor
-        }
-    }
+    func setup() {}
     
 }

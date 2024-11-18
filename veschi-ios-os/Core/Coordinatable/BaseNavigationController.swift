@@ -10,8 +10,6 @@ final class BaseNavigationController: UINavigationController {
         setNavigationBarAppearance()
     }
     
-    private func setNavigationBarAppearance() {
-        navigationBar.tintColor = Colors.accent
-    }
+    private func setNavigationBarAppearance() {}
     
 }
