@@ -24,13 +24,47 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search countries or codes"
+            "value" : "Search for countries or codes"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher des pays ou des indicatifs"
+          }
+        }
+      }
+    },
+    "throw_your_number" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Throw your number..?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton numéro..?"
+          }
+        }
+      }
+    },
+    "to_create_an_account_or_sign_in" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "to create an account or sign in. It will \nonly be used for this. That's a promise"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pour créer un compte ou te connecter. On l’utilisera juste pour ça, promis"
           }
         }
       }

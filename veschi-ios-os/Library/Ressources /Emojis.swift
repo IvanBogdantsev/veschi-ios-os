@@ -3,4 +3,5 @@
 
 enum Emojis {
     static let package = "📦"
+    static let telephone = "📞"
 }

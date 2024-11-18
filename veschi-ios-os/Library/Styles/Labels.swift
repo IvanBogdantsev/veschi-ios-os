@@ -4,11 +4,66 @@
 import UIKit
 
 enum Labels {
-    static func logoTitle(text: String? = nil) -> UILabel {
+    static func superLargeTitle(text: String? = nil) -> UILabel {
         return UILabel(
             text: text,
             multiline: false,
-            font: Fonts.logoTitle,
+            font: Fonts.superLargeTitle,
+            textColor: Colors.text,
+            centered: true,
+            adjustsFontSizeToFitWidth: false
+        )
+    }
+    
+    static func title(text: String? = nil) -> UILabel {
+        return UILabel(
+            text: text,
+            multiline: true,
+            font: Fonts.title,
+            textColor: Colors.text,
+            centered: true,
+            adjustsFontSizeToFitWidth: false
+        )
+    }
+    
+    static func body(text: String? = nil) -> UILabel {
+        return UILabel(
+            text: text,
+            multiline: true,
+            font: Fonts.body,
+            textColor: Colors.text,
+            centered: true,
+            adjustsFontSizeToFitWidth: false
+        )
+    }
+    
+    static func headline(text: String? = nil) -> UILabel {
+        return UILabel(
+            text: text,
+            multiline: true,
+            font: Fonts.headline,
+            textColor: Colors.text,
+            centered: true,
+            adjustsFontSizeToFitWidth: false
+        )
+    }
+    
+    static func subheadline(text: String? = nil) -> UILabel {
+        return UILabel(
+            text: text,
+            multiline: true,
+            font: Fonts.subheadline,
+            textColor: Colors.text,
+            centered: true,
+            adjustsFontSizeToFitWidth: false
+        )
+    }
+    
+    static func emojiHeader(text: String? = nil) -> UILabel {
+        return UILabel(
+            text: text,
+            multiline: false,
+            font: Fonts.emojiHeader,
             textColor: Colors.text,
             centered: true,
             adjustsFontSizeToFitWidth: true

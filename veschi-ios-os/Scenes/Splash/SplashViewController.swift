@@ -5,7 +5,7 @@ import UIKit
 
 final class SplashViewController: BaseViewController {
     
-    private let label = Labels.logoTitle(text: "\(Strings.veschi) \(Emojis.package)")
+    private let label = Labels.superLargeTitle(text: "\(Strings.veschi) \(Emojis.package)")
     
     init() {
         super.init(nibName: nil, bundle: nil)
