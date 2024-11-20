@@ -4,7 +4,7 @@
 import RxCocoa
 import UIKit
 
-final class AuthViewController: BaseViewController {
+final class AuthViewController: BaseViewController, EndsEditingOnTap {
     
     private let contentView = AuthView()
     private let countryCodesNavigationController = BaseNavigationController()
@@ -31,6 +31,7 @@ final class AuthViewController: BaseViewController {
     
     override func basicSetup() {
         super.basicSetup()
+        setupEndEditingBehaviour()
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
         contentView.telephoneNumberTextField.delegate = self
     }

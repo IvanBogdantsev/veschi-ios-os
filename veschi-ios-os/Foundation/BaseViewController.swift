@@ -18,7 +18,6 @@ class BaseViewController: UIViewController {
     }
     
     func basicSetup() {
-        tapGestureRecognizer.addTarget(self, action: #selector(didTapContentView))
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -26,11 +25,4 @@ class BaseViewController: UIViewController {
     
     func bindActions() {}
     
-}
-
-extension BaseViewController {
-    @objc
-    private func didTapContentView() {
-        view.endEditing(true)
-    }
 }
