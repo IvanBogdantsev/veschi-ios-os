@@ -34,6 +34,14 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
         setupEndEditingBehaviour()
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
         contentView.telephoneNumberTextField.delegate = self
+        contentView.telephoneNumberTextField.addBarButtons(
+            UIBarButtonItem(
+                title: Strings.send,
+                style: .done,
+                target: self,
+                action: #selector(didTapSendBarButton)
+            )
+        )
     }
     
     override func bindViewModel() {
@@ -79,7 +87,7 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
         contentView.countryCodeButton.rx.tap
             .subscribe(
                 onNext: { [weak self] in
-                    self?.viewModel.inputs.countryCodeButtonTapped()
+                    self?.viewModel.inputs.didTapCountryCodeButton()
                 }
             )
             .disposed(by: disposeBag)
@@ -92,6 +100,14 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
     
 }
 
+extension AuthViewController {
+    @objc
+    func didTapSendBarButton() {
+        view.endEditing(true)
+        // TODO: bind to telephone send
+    }
+}
+
 extension AuthViewController: UITextFieldDelegate {
     func textField(
         _ textField: UITextField,
@@ -100,7 +116,7 @@ extension AuthViewController: UITextFieldDelegate {
     ) -> Bool {
         if let currentText = textField.text as? NSString {
             let newText = currentText.replacingCharacters(in: range, with: string)
-            viewModel.inputs.phoneNumberChanged(newText)
+            viewModel.inputs.phoneNumberDidChange(newText)
         }
         return false
     }

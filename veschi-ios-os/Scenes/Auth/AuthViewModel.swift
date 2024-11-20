@@ -6,8 +6,8 @@ import RxSwift
 
 protocol AuthViewModelInputs {
     func viewDidLoad()
-    func countryCodeButtonTapped()
-    func phoneNumberChanged(_ phoneNumber: String)
+    func didTapCountryCodeButton()
+    func phoneNumberDidChange(_ phoneNumber: String)
     func didChooseCountryFromTable(_ ISOCode: String)
 }
 
@@ -38,7 +38,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
     // MARK: Values
     private let viewDidLoadValue = PublishSubject<Void>()
     private let presentCountryCodesListValue = PublishSubject<Void>()
-    private let phoneNumberChangedValue = PublishSubject<String>()
+    private let phoneNumberDidChangeValue = PublishSubject<String>()
     private let didChooseCountryFromTableValue = PublishSubject<String>()
     
     // MARK: Services
@@ -64,7 +64,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
                 return self.getDialingCode(for: ISOCode)
             }
         
-        let formattedPhoneNumber = phoneNumberChangedValue
+        let formattedPhoneNumber = phoneNumberDidChangeValue
             .map { phoneNumber in
                 return phoneNumberFormatter.formatPartial(phoneNumber)
             }
@@ -98,7 +98,7 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
             return "+\(text.trimmingCharacters(in: CharacterSet(charactersIn: "+")))"
         }
         
-        formIsValid = phoneNumberChangedValue
+        formIsValid = phoneNumberDidChangeValue
             .map { phoneNumber in
                 return phoneNumberUtility.isValidPhoneNumber(phoneNumber)
             }
@@ -141,12 +141,12 @@ extension AuthViewModel: AuthViewModelInputs {
         viewDidLoadValue.onNext(Void())
     }
     
-    func countryCodeButtonTapped() {
+    func didTapCountryCodeButton() {
         presentCountryCodesListValue.onNext(Void())
     }
     
-    func phoneNumberChanged(_ phoneNumber: String) {
-        phoneNumberChangedValue.onNext(phoneNumber)
+    func phoneNumberDidChange(_ phoneNumber: String) {
+        phoneNumberDidChangeValue.onNext(phoneNumber)
     }
     
     func didChooseCountryFromTable(_ ISOCode: String) {
