@@ -9,6 +9,7 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
     private let contentView = AuthView()
     private let countryCodesNavigationController = BaseNavigationController()
     private let countryCodesTableViewController = CountryCodesSearchTableViewController()
+    private let keyboardIntersectionTracker = KeyboardIntersectionTracker()
     private let viewModel: AuthViewModelProtocol
     
     init(viewModel: AuthViewModelProtocol) {
@@ -32,6 +33,10 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
     override func basicSetup() {
         super.basicSetup()
         setupEndEditingBehaviour()
+        keyboardIntersectionTracker.startTrackingIntersection(
+            of: contentView.stackView,
+            in: contentView
+        )
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
         contentView.telephoneNumberTextField.delegate = self
         contentView.telephoneNumberTextField.addBarButtons(
