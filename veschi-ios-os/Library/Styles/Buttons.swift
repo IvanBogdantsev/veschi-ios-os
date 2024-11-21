@@ -12,7 +12,7 @@ enum Buttons {
             backgroundColor: Colors.background,
             cornerRadius: DesignConfiguration.controlElementsCornerRadius,
             borderWidth: DesignConfiguration.borderWidth,
-            borderColor: Colors.accent,
+            borderColor: Colors.border,
             font: Fonts.body
         )
         button.titleLabel?.snp.makeConstraints { make in make.left.right.equalToSuperview().inset(DesignConfiguration.buttonInternalElementsSideInset)

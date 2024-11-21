@@ -69,7 +69,6 @@ final class CountryCodesSearchTableViewController: UITableViewController {
         )
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = Strings.search_for_countries_or_codes
-        tableView.tintColor = Colors.accent
     }
 }
 
