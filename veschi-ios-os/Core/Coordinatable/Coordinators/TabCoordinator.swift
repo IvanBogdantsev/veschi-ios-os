@@ -1,9 +1,5 @@
-//
-//  TabCoordinator.swift
-//
-//
-//  Created by Ivan B on 16.05.23.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import UIKit
 
@@ -41,16 +37,15 @@ final class TabCoordinator: BaseCoordinator {
         self.navigationController = navigationController
         tabBarController = UITabBarController()
         super.init(router: Router(rootController: navigationController))
-        startingViewController = tabBarController
         setupAppearance()
     }
     
     override func start() {
-        let controllers: [UINavigationController] = TabBarPage.allCases.map({ getTabController($0) })
+        let controllers: [UINavigationController] = TabBarPage.allCases.map { getTabController($0) }
         prepareTabBarController(withTabControllers: controllers)
         UIView.transition(
-            with: self.router.rootController.view, //MARK: TO CHECK
-            duration: AnimationDuration.zeroTwoSecond.timeInterval,
+            with: self.router.rootController.view,
+            duration: AnimationDuration.zeroPointTwoSecond,
             options: .transitionCrossDissolve,
             animations: {
                 self.router.setRootModule(self.tabBarController, hideBar: true)
@@ -83,6 +78,7 @@ final class TabCoordinator: BaseCoordinator {
     private func setupAppearance() {
         navigationController.isNavigationBarHidden = true
     }
+    
 }
 
 extension TabCoordinator: TabCoordinatorInterface {

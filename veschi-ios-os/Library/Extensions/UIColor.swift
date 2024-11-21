@@ -1,19 +1,15 @@
-//
-//  UIColor.swift
-//  
-//
-//  Created by Vanya Bogdantsev on 20.08.2023.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import CoreGraphics
-import UIKit.UIColor
+import UIKit
 
 extension UIColor {
     static func hex(_ value: UInt32) -> UIColor {
-        let r = CGFloat((value & 0xFF0000) >> 16) / 255.0
-        let g = CGFloat((value & 0xFF00) >> 8) / 255.0
-        let b = CGFloat(value & 0xFF) / 255.0
+        let red = CGFloat((value & 0xFF0000) >> 16) / 255.0
+        let green = CGFloat((value & 0xFF00) >> 8) / 255.0
+        let blue = CGFloat(value & 0xFF) / 255.0
         
-        return UIColor(red: r, green: g, blue: b, alpha: 1.0)
+        return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
     }
 }

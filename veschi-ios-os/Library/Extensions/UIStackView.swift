@@ -1,11 +1,7 @@
-//
-//  UIStackView.swift
-//  
-//
-//  Created by Vanya Bogdantsev on 21.08.2023.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
-import UIKit.UIStackView
+import UIKit
 
 extension UIStackView {
     convenience init(axis: NSLayoutConstraint.Axis, spacing: CGFloat = 0) {

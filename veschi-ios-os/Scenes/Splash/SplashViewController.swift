@@ -1,14 +1,11 @@
-//
-//  SplashViewController.swift
-//  
-//
-//  Created by  Ivan B  on 27.05.22.
-//  
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import UIKit
 
-final class SplashViewController: UIViewController {
+final class SplashViewController: BaseViewController {
+    
+    private let label = Labels.superLargeTitle(text: "\(Strings.veschi) \(Emojis.package)")
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -20,7 +17,20 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        layout()
+        setStyles()
+    }
+    
+    private func layout() {
+        view.addSubview(label)
+        label.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.left.right.equalToSuperview().inset(40)
+        }
+    }
+    
+    private func setStyles() {
+        view.backgroundColor = Colors.background
     }
     
 }

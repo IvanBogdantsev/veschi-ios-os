@@ -1,14 +1,9 @@
-//
-//  Coordinatable.swift
-//  
-//
-//  Created by  Ivan B  on 16.05.23.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import UIKit
 
 protocol Coordinatable: AnyObject {
-    var startingViewController: UIViewController? { get }
     var parent: Coordinatable? { get }
     var children: [Coordinatable] { get }
     

@@ -1,15 +1,22 @@
-//
-//  Colors.swift
-//  
-//
-//  Created by Vanya Bogdantsev on 20.08.2023.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
-import UIKit.UIColor
+import UIKit
 
 enum Colors {
     static let background = UIColor.systemBackground
     static let secondaryBackground = UIColor.secondarySystemBackground
+    static let border = UIColor.separator
     static let text = UIColor.label
-    static let secondaryText = UIColor.hex(0x909090)
+    static let secondaryText = UIColor.secondaryLabel
+    static let skeletonAnimatedGradientSequence = [
+        UIColor.quaternarySystemFill,
+        UIColor.tertiarySystemFill,
+        UIColor.secondarySystemFill,
+        UIColor.systemFill,
+        UIColor.systemFill,
+        UIColor.secondarySystemFill,
+        UIColor.tertiarySystemFill,
+        UIColor.quaternarySystemFill
+    ]
 }

@@ -1,15 +1,7 @@
-//
-//  AppCoordinator.swift
-//
-//
-//  Created by  Ivan B  on 16.05.23.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
 import UIKit
-
-protocol SplashSceneOutput: AnyObject {
-    func proceedFromSplash()
-}
 
 final class AppCoordinator: BaseCoordinator {
     
@@ -24,11 +16,12 @@ final class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        router.setRootModule(SplashAssembly(sceneOutput: self).makeScene())
+        router.setRootModule(SplashViewController())
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let authCoordinator = AuthCoordinator(router: self.router)
+            self.add(authCoordinator)
+            authCoordinator.start()
+        }
     }
     
-}
-
-extension AppCoordinator: SplashSceneOutput {
-    func proceedFromSplash() {}
 }

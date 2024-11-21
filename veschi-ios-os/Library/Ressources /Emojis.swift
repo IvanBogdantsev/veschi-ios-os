@@ -1,8 +1,7 @@
-//
-//  Emojis.swift
-//  veschi-ios
-//
-//  Created by Vanya Bogdantsev on 12.10.2024.
-//
+//  veschi-ios-os
+//  Created by Ivan B.
 
-import Foundation
+enum Emojis {
+    static let package = "📦"
+    static let telephone = "📞"
+}
