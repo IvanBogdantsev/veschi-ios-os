@@ -2,7 +2,7 @@
 //  Created by Ivan B.
 
 import Appwrite
-
+// TODO: strap firebase auth to appwrite
 protocol UserAccountProtocol {
     func create(email: String, userID: String, name: String?) async throws
     func createSession(email: String, password: String) async throws -> Session
