@@ -16,6 +16,7 @@ final class UserAccount: AWAccount, UserAccountProtocol {
     init(database: DatabaseProtocol) {
         self.database = database
     }
+    
     // TODO: should return user
     func create(
         email: String,
