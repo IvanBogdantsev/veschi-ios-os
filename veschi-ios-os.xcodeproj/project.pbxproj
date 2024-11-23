@@ -13,6 +13,8 @@
 		4E7B82512CBB14E800322C2F /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4E7B82502CBB14E800322C2F /* RxRelay */; };
 		4E7B82532CBB14E800322C2F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4E7B82522CBB14E800322C2F /* RxSwift */; };
 		4E7B825B2CBB150000322C2F /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 4E7B825A2CBB150000322C2F /* SkeletonView */; };
+		4E839D722CEF8E9200F982A9 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 4E839D712CEF8E9200F982A9 /* GoogleSignIn */; };
+		4E839D742CEF8E9200F982A9 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4E839D732CEF8E9200F982A9 /* GoogleSignInSwift */; };
 		4E8EE88E2CBC0452006FFF89 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8EE88D2CBC0452006FFF89 /* Appwrite */; };
 		4E9803952CC8534E00D379DA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4E9803942CC8534E00D379DA /* FirebaseAnalytics */; };
 		4E9803972CC8534E00D379DA /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4E9803962CC8534E00D379DA /* FirebaseCrashlytics */; };
@@ -55,6 +57,8 @@
 				4E7B82512CBB14E800322C2F /* RxRelay in Frameworks */,
 				4E9803952CC8534E00D379DA /* FirebaseAnalytics in Frameworks */,
 				4E9803972CC8534E00D379DA /* FirebaseCrashlytics in Frameworks */,
+				4E839D742CEF8E9200F982A9 /* GoogleSignInSwift in Frameworks */,
+				4E839D722CEF8E9200F982A9 /* GoogleSignIn in Frameworks */,
 				4E7B825B2CBB150000322C2F /* SkeletonView in Frameworks */,
 				4E7B824F2CBB14E800322C2F /* RxCocoa in Frameworks */,
 				4E98039C2CC8541C00D379DA /* SnapKit in Frameworks */,
@@ -115,6 +119,8 @@
 				4E98039B2CC8541C00D379DA /* SnapKit */,
 				4E0FEF872CCA3D620015BEBC /* Swinject */,
 				4E31B5CC2CE2E9A9002930A7 /* PhoneNumberKit */,
+				4E839D712CEF8E9200F982A9 /* GoogleSignIn */,
+				4E839D732CEF8E9200F982A9 /* GoogleSignInSwift */,
 			);
 			productName = "veschi-ios-os";
 			productReference = 4E7B81D02CBB133400322C2F /* veschi-ios-os.app */;
@@ -154,6 +160,7 @@
 				4E0FEF862CCA3D620015BEBC /* XCRemoteSwiftPackageReference "Swinject" */,
 				4EA516DD2CD5626C00FB7131 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				4E31B5CB2CE2E9A9002930A7 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
+				4E839D702CEF8E9200F982A9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4E7B81D12CBB133400322C2F /* Products */;
@@ -454,6 +461,14 @@
 				minimumVersion = 1.31.0;
 			};
 		};
+		4E839D702CEF8E9200F982A9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		4E8EE88C2CBC0452006FFF89 /* XCRemoteSwiftPackageReference "sdk-for-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/appwrite/sdk-for-apple";
@@ -518,6 +533,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E7B82592CBB150000322C2F /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
+		};
+		4E839D712CEF8E9200F982A9 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E839D702CEF8E9200F982A9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		4E839D732CEF8E9200F982A9 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E839D702CEF8E9200F982A9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 		4E8EE88D2CBC0452006FFF89 /* Appwrite */ = {
 			isa = XCSwiftPackageProductDependency;
