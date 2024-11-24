@@ -3,6 +3,7 @@
 
 import RxSwift
 import UIKit
+
 // not final
 // swiftlint:disable:next final_class
 class BaseViewController: UIViewController {
@@ -12,12 +13,12 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        basicSetup()
+        setup()
         bindViewModel()
         bindActions()
     }
     
-    func basicSetup() {
+    func setup() {
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     

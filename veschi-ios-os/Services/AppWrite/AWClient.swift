@@ -2,6 +2,7 @@
 //  Created by Ivan B.
 
 import Appwrite
+
 // not final
 // swiftlint:disable:next final_class
 class AWClient {

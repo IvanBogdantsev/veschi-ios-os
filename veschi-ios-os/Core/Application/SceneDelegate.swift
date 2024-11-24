@@ -2,6 +2,7 @@
 //  Created by Ivan B.
 
 import UIKit
+
 // swiftlint:disable:next final_class
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     

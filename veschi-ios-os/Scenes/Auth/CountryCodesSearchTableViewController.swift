@@ -5,7 +5,7 @@ import PhoneNumberKit
 import UIKit
 
 // this class is entirely written by chatGPT. Looks ugly, but works great
-final class CountryCodesSearchTableViewController: UITableViewController {
+final class CountryCodesSearchTableViewController: BaseTableViewController {
     
     var onSelection: ((CountryDialingCode) -> Void)?
     
@@ -40,15 +40,6 @@ final class CountryCodesSearchTableViewController: UITableViewController {
         !(searchController.searchBar.text?.isEmpty ?? true)
     }
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(
@@ -57,7 +48,8 @@ final class CountryCodesSearchTableViewController: UITableViewController {
         )
     }
     
-    private func setup() {
+    override func setup() {
+        super.setup()
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.keyboardType = .asciiCapable

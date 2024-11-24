@@ -30,8 +30,8 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
         viewModel.inputs.viewDidLoad()
     }
     
-    override func basicSetup() {
-        super.basicSetup()
+    override func setup() {
+        super.setup()
         setupEndEditingBehaviour()
         keyboardIntersectionTracker.startTrackingIntersection(
             of: contentView.stackView,

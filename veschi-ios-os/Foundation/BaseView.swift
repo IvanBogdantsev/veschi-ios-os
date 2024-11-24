@@ -2,6 +2,7 @@
 //  Created by Ivan B.
 
 import UIKit
+
 // not final
 // swiftlint:disable:next final_class
 class BaseView: UIView {
