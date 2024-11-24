@@ -5,6 +5,7 @@ import FirebaseCore
 import UIKit
 
 // TODO: check DSYMs files status (crashlyitcs)
+// TODO: add durations to guidelines
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate { // swiftlint:disable:this final_class
     

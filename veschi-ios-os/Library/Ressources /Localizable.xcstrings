@@ -52,6 +52,23 @@
         }
       }
     },
+    "send_me_the_code" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send me the code"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyez-moi le code"
+          }
+        }
+      }
+    },
     "throw_your_number" : {
       "extractionState" : "manual",
       "localizations" : {

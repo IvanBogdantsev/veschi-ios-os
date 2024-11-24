@@ -13,31 +13,15 @@ extension UIView {
         return self.subviews.filter { $0.isKind(of: type) }
     }
     
-    func show(
-        animated: Bool,
-        withDuration duration: TimeInterval = AnimationDuration.zeroPointThreeSecond,
+    func setAlpha(
+        to alpha: CGFloat,
+        withDuration duration: TimeInterval,
         completion: ((Bool) -> Void)? = nil
     ) {
-        let withDuration: TimeInterval = animated ? duration : 0
         UIView.animate(
-            withDuration: withDuration,
+            withDuration: duration,
             animations: {
-                self.alpha = 1
-            },
-            completion: completion
-        )
-    }
-    
-    func hide(
-        animated: Bool,
-        withDuration duration: TimeInterval = AnimationDuration.zeroPointThreeSecond,
-        completion: ((Bool) -> Void)? = nil
-    ) {
-        let withDuration: TimeInterval = animated ? duration : 0
-        UIView.animate(
-            withDuration: withDuration,
-            animations: {
-                self.alpha = 0
+                self.alpha = alpha
             },
             completion: completion
         )

@@ -5,10 +5,9 @@ import SnapKit
 import UIKit
 
 enum Buttons {
-    
     /// used on the phone auth screen and looks essentially like text field
     static func leftAligned(title: String? = nil) -> UIButton {
-        let button = UIButton(
+        let button = BaseButton(
             title: title,
             titleColor: Colors.text,
             backgroundColor: Colors.background,
@@ -23,35 +22,12 @@ enum Buttons {
     }
     
     static func mainAction(title: String? = nil) -> UIButton {
-        return UIButton(
+        return BaseButton(
             title: title,
-            titleColor: Colors.text,
+            titleColor: Colors.white,
             backgroundColor: Colors.accent,
             cornerRadius: DesignConfiguration.controlElementsCornerRadius,
-            font: Fonts.body
+            font: Fonts.headline
         )
-    }
-}
-
-fileprivate extension UIButton {
-    convenience init(
-        title: String? = nil,
-        titleColor: UIColor,
-        image: UIImage? = nil,
-        backgroundColor: UIColor,
-        cornerRadius: CGFloat = 0,
-        borderWidth: CGFloat = 0,
-        borderColor: UIColor = .clear,
-        font: UIFont
-    ) {
-        self.init()
-        self.setTitle(title, for: .normal)
-        self.setTitleColor(titleColor, for: .normal)
-        self.setImage(image, for: .normal)
-        self.backgroundColor = backgroundColor
-        self.layer.cornerRadius = cornerRadius
-        self.layer.borderWidth = borderWidth
-        self.layer.borderColor = borderColor.cgColor
-        self.titleLabel?.font = font
     }
 }

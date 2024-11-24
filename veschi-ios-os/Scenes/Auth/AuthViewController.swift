@@ -39,14 +39,6 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
         )
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
         contentView.telephoneNumberTextField.delegate = self
-        contentView.telephoneNumberTextField.addBarButtons(
-            UIBarButtonItem(
-                title: Strings.send,
-                style: .done,
-                target: self,
-                action: #selector(didTapSendBarButton)
-            )
-        )
     }
     
     override func bindViewModel() {
@@ -81,8 +73,8 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
         
         viewModel.outputs.formIsValid
             .subscribe(
-                onNext: { isValid in
-                    print(isValid)
+                onNext: { [weak self] isValid in
+                    self?.contentView.sendButton.isEnabled = isValid
                 }
             )
             .disposed(by: disposeBag)
@@ -103,14 +95,6 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
         }
     }
     
-}
-
-extension AuthViewController {
-    @objc
-    func didTapSendBarButton() {
-        view.endEditing(true)
-        // TODO: bind to telephone send
-    }
 }
 
 extension AuthViewController: UITextFieldDelegate {

@@ -7,6 +7,7 @@ enum Strings {
     static let throw_your_number = "throw_your_number".localized()
     static let to_create_an_account_or_sign_in = "to_create_an_account_or_sign_in".localized()
     static let send = "send".localized()
+    static let send_me_the_code = "send_me_the_code".localized()
     
     static func and_num_more(num: Int) -> String {
         let format = "and_%d_more".localized()

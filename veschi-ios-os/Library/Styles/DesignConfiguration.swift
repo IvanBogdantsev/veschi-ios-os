@@ -13,4 +13,5 @@ enum DesignConfiguration {
     static let fullWidthControlElementScreenPercentage: CGFloat = 0.88
     static let stackViewVerticalSpacing: CGFloat = 16
     static let keyboardInsetToControlElements: CGFloat = 8
+    static let disabledStateAlpha: CGFloat = 0.2
 }

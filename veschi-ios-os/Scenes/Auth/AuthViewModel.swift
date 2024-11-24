@@ -102,10 +102,12 @@ final class AuthViewModel: AuthViewModelProtocol, AuthViewModelOutputs {
             .map { phoneNumber in
                 return phoneNumberUtility.isValidPhoneNumber(phoneNumber)
             }
+            .startWith(false)
     }
     
 }
 
+// MARK: Local helpers
 extension AuthViewModel {
     private func getDialingCode(for ISOCode: String) -> String? {
         guard let dialingCode = phoneNumberUtility.dialingCode(

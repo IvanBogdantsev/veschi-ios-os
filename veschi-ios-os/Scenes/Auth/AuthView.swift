@@ -11,20 +11,25 @@ final class AuthView: BaseView {
     let subtitleLabel = Labels.body(text: Strings.to_create_an_account_or_sign_in)
     let countryCodeButton = Buttons.leftAligned()
     let telephoneNumberTextField = TextFields.telephoneNumberEntry()
+    let sendButton = Buttons.mainAction(title: Strings.send_me_the_code)
     
     override func layout() {
+        super.layout()
         addSubviews(stackView)
         stackView.addArrangedSubviews(
             emojiHeaderLabel,
             titleLabel,
             subtitleLabel,
             countryCodeButton,
-            telephoneNumberTextField
+            telephoneNumberTextField,
+            sendButton
         )
         
         stackView.snp.makeConstraints { make in
             make.bottom.equalTo(snp.centerY).offset(
-                DesignConfiguration.principalActionButtonHeight + DesignConfiguration.textFieldHeight
+                DesignConfiguration.textFieldHeight +
+                DesignConfiguration.textFieldHeight +
+                DesignConfiguration.principalActionButtonHeight
             )
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(
@@ -32,10 +37,13 @@ final class AuthView: BaseView {
             )
         }
         countryCodeButton.snp.makeConstraints { make in
-            make.height.equalTo(DesignConfiguration.principalActionButtonHeight)
+            make.height.equalTo(DesignConfiguration.textFieldHeight)
         }
         telephoneNumberTextField.snp.makeConstraints { make in
             make.height.equalTo(DesignConfiguration.textFieldHeight)
+        }
+        sendButton.snp.makeConstraints { make in
+            make.height.equalTo(DesignConfiguration.principalActionButtonHeight)
         }
     }
     
