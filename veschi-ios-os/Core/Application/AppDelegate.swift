@@ -4,7 +4,6 @@
 import FirebaseCore
 import UIKit
 
-// TODO: add durations to guidelines
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate { // swiftlint:disable:this final_class
     
