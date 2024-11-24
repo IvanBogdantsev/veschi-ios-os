@@ -5,6 +5,8 @@ import SnapKit
 import UIKit
 
 enum Buttons {
+    
+    /// used on the phone auth screen and looks essentially like text field
     static func leftAligned(title: String? = nil) -> UIButton {
         let button = UIButton(
             title: title,
@@ -18,6 +20,16 @@ enum Buttons {
         button.titleLabel?.snp.makeConstraints { make in make.left.right.equalToSuperview().inset(DesignConfiguration.buttonInternalElementsSideInset)
         }
         return button
+    }
+    
+    static func mainAction(title: String? = nil) -> UIButton {
+        return UIButton(
+            title: title,
+            titleColor: Colors.text,
+            backgroundColor: Colors.accent,
+            cornerRadius: DesignConfiguration.controlElementsCornerRadius,
+            font: Fonts.body
+        )
     }
 }
 

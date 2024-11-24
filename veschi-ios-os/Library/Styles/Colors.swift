@@ -9,6 +9,7 @@ enum Colors {
     static let border = UIColor.separator
     static let text = UIColor.label
     static let secondaryText = UIColor.secondaryLabel
+    static let accent = UIColor.systemBlue
     static let skeletonAnimatedGradientSequence = [
         UIColor.quaternarySystemFill,
         UIColor.tertiarySystemFill,
