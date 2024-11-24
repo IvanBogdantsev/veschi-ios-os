@@ -4,7 +4,7 @@
 import UIKit
 
 enum DesignConfiguration {
-    static let controlElementsCornerRadius: CGFloat = 8
+    static let controlElementsCornerRadius: CGFloat = 10
     static let borderWidth: CGFloat = 1
     static let buttonInternalElementsSideInset: CGFloat = 16
     static let textFieldTextInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
