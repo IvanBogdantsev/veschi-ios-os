@@ -12,7 +12,7 @@ enum DesignConfiguration {
     static let textFieldHeight: CGFloat = 50
     static let fullWidthControlElementScreenPercentage: CGFloat = 0.88
     static let stackViewVerticalSpacing: CGFloat = 16
-    static let keyboardInsetToControlElements: CGFloat = 8
+    static let keyboardInsetToControlElements: CGFloat = 10
     static let disabledStateAlpha: CGFloat = 0.2
     static let buttonEnabledStateSwitchDuration: TimeInterval = AnimationDuration.zeroPointOneSecond
     static let transitionCrossDissolveDuration: TimeInterval = AnimationDuration.zeroPointTwoSecond
