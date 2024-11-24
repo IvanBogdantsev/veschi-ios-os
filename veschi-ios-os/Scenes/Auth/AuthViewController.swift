@@ -39,6 +39,8 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
         )
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]
         contentView.telephoneNumberTextField.delegate = self
+        // removes flickering when scene just loaded
+        contentView.sendButton.alpha = DesignConfiguration.disabledStateAlpha
     }
     
     override func bindViewModel() {
