@@ -14,4 +14,7 @@ enum DesignConfiguration {
     static let stackViewVerticalSpacing: CGFloat = 16
     static let keyboardInsetToControlElements: CGFloat = 8
     static let disabledStateAlpha: CGFloat = 0.2
+    static let buttonEnabledStateSwitchDuration: TimeInterval = AnimationDuration.zeroPointOneSecond
+    static let transitionCrossDissolveDuration: TimeInterval = AnimationDuration.zeroPointOneSecond
+    static let skeletonAnimationTransitionDuration: TimeInterval = AnimationDuration.zeroPointThreeSecond
 }

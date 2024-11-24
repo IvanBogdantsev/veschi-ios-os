@@ -13,7 +13,7 @@ final class AuthCoordinator: BaseCoordinator {
         let scene = AuthViewController(viewModel: DIContainer.shared.resolve())
         UIView.transition(
             with: router.rootController.view,
-            duration: AnimationDuration.zeroPointOneSecond,
+            duration: DesignConfiguration.transitionCrossDissolveDuration,
             options: .transitionCrossDissolve,
             animations: {
                 self.router.setRootModule(scene)

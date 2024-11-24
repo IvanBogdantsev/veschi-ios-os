@@ -12,12 +12,12 @@ class BaseButton: UIButton {
             if isEnabled {
                 setAlpha(
                     to: 1,
-                    withDuration: AnimationDuration.zeroPointOneSecond
+                    withDuration: DesignConfiguration.buttonEnabledStateSwitchDuration
                 )
             } else {
                 setAlpha(
                     to: DesignConfiguration.disabledStateAlpha,
-                    withDuration: AnimationDuration.zeroPointOneSecond
+                    withDuration: DesignConfiguration.buttonEnabledStateSwitchDuration
                 )
             }
         }

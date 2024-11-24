@@ -36,11 +36,11 @@ extension UIView {
         showAnimatedGradientSkeleton(
             usingGradient: SkeletonGradient(colors: Colors.skeletonAnimatedGradientSequence),
             animation: SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight),
-            transition: .crossDissolve(AnimationDuration.zeroPointThreeSecond)
+            transition: .crossDissolve(DesignConfiguration.skeletonAnimationTransitionDuration)
         )
     }
     
     func veschi_skeleton_hideSkeleton() {
-        hideSkeleton(transition: .crossDissolve(AnimationDuration.zeroPointThreeSecond))
+        hideSkeleton(transition: .crossDissolve(DesignConfiguration.skeletonAnimationTransitionDuration))
     }
 }
