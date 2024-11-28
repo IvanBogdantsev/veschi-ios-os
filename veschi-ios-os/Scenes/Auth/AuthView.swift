@@ -5,7 +5,10 @@ import UIKit
 
 final class AuthView: BaseView {
     
-    let stackView = UIStackView(axis: .vertical, spacing: DesignConfiguration.stackViewVerticalSpacing)
+    let telephoneAuthVStackView = UIStackView(
+        axis: .vertical,
+        spacing: DesignConfiguration.stackViewVerticalSpacing
+    )
     let emojiHeaderLabel = Labels.emojiHeader(text: Emojis.telephone)
     let titleLabel = Labels.title(text: Strings.throw_your_number)
     let subtitleLabel = Labels.body(text: Strings.to_create_an_account_or_sign_in)
@@ -13,10 +16,20 @@ final class AuthView: BaseView {
     let telephoneNumberTextField = TextFields.telephoneNumberEntry()
     let sendButton = Buttons.mainAction(title: Strings.send_me_the_code)
     
+    let thirdPartyAuthVSStackView = UIStackView(
+        axis: .vertical,
+        spacing: DesignConfiguration.stackViewVerticalSpacing / 2,
+        distribution: .fillEqually
+    )
+    let googleSignInButton = Buttons.googleSignIn()
+    let appleSignInButton = Buttons.appleSignIn()
+    
     override func layout() {
         super.layout()
-        addSubviews(stackView)
-        stackView.addArrangedSubviews(
+        addSubviews(telephoneAuthVStackView, thirdPartyAuthVSStackView)
+        
+        // MARK: telephone auth block
+        telephoneAuthVStackView.addArrangedSubviews(
             emojiHeaderLabel,
             titleLabel,
             subtitleLabel,
@@ -24,8 +37,7 @@ final class AuthView: BaseView {
             telephoneNumberTextField,
             sendButton
         )
-        
-        stackView.snp.makeConstraints { make in
+        telephoneAuthVStackView.snp.makeConstraints { make in
             make.bottom.equalTo(snp.centerY).offset(
                 DesignConfiguration.textFieldHeight +
                 DesignConfiguration.textFieldHeight +
@@ -44,6 +56,24 @@ final class AuthView: BaseView {
         }
         sendButton.snp.makeConstraints { make in
             make.height.equalTo(DesignConfiguration.principalActionButtonHeight)
+        }
+        
+        // MARK: third party auth block
+        thirdPartyAuthVSStackView.addArrangedSubviews(
+            googleSignInButton,
+            appleSignInButton
+        )
+        thirdPartyAuthVSStackView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(telephoneAuthVStackView.snp.bottom).offset(
+                DesignConfiguration.stackViewVerticalSpacing * 2
+            )
+            make.width.equalToSuperview().multipliedBy(
+                DesignConfiguration.fullWidthControlElementScreenPercentage
+            )
+        }
+        googleSignInButton.snp.makeConstraints { make in
+            make.height.equalTo(DesignConfiguration.secondaryActionButtonHeight)
         }
     }
     

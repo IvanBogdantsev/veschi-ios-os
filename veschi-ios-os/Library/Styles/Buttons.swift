@@ -1,6 +1,7 @@
 // veschi-ios-os
 // Created by Ivan B.
 
+import AuthenticationServices
 import SnapKit
 import UIKit
 
@@ -28,6 +29,32 @@ enum Buttons {
             backgroundColor: Colors.accent,
             cornerRadius: DesignConfiguration.controlElementsCornerRadius,
             font: Fonts.headline
+        )
+    }
+    
+    static func googleSignIn() -> UIButton {
+        let button = BaseButton(
+            title: Strings.continue_with_google,
+            titleColor: Colors.googleSignInButtonText,
+            image: Images.googleLogo,
+            backgroundColor: Colors.googleSignInButtonBackground,
+            cornerRadius: DesignConfiguration.controlElementsCornerRadius,
+            borderWidth: DesignConfiguration.borderWidth,
+            borderColor: Colors.googleSignInButtonBorder,
+            font: Fonts.googleSignIn
+        )
+        button.setInsets(
+            forContentPadding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16),
+            imageTitlePadding: 12
+        )
+        return button
+    }
+    
+    static func appleSignIn() -> ASAuthorizationAppleIDButton {
+        return ASAuthorizationAppleIDButton(
+            userInterfaceStyle: Environment.userInterfaceStyle,
+            cornerRadius: DesignConfiguration.controlElementsCornerRadius,
+            type: .continue
         )
     }
 }

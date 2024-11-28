@@ -20,6 +20,13 @@ enum Fonts {
     static let emojiHeader = UIFont.systemFont(ofSize: 78)
 }
 
+extension Fonts {
+    /// 14 medium
+    static var googleSignIn: UIFont {
+        return UIFont(name: "Roboto-Medium", size: 14) ?? Fonts.subheadline
+    }
+}
+
 fileprivate extension UIFont {
     func bolded() -> UIFont {
         return with(traits: .traitBold)

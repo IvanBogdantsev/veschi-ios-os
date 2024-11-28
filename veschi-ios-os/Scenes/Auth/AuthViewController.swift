@@ -34,7 +34,7 @@ final class AuthViewController: BaseViewController, EndsEditingOnTap {
         super.setup()
         setupEndEditingBehaviour()
         keyboardIntersectionTracker.startTrackingIntersection(
-            of: contentView.stackView,
+            of: contentView.telephoneAuthVStackView,
             in: contentView
         )
         countryCodesNavigationController.viewControllers = [countryCodesTableViewController]

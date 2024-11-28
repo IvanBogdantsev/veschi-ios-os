@@ -3,4 +3,6 @@
 
 import UIKit
 
-enum Images {}
+enum Images {
+    static let googleLogo = UIImage(named: "google_logo")
+}

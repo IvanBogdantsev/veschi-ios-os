@@ -22,3 +22,29 @@ enum Colors {
         UIColor.quaternarySystemFill
     ]
 }
+
+extension Colors {
+    static var googleSignInButtonBackground: UIColor {
+        switch Environment.userInterfaceStyle {
+        case .light: return UIColor.hex(0xFFFFFF)
+        case .dark: return UIColor.hex(0x131314)
+        default: return UIColor()
+        }
+    }
+    
+    static var googleSignInButtonBorder: UIColor {
+        switch Environment.userInterfaceStyle {
+        case .light: return UIColor.hex(0x747775)
+        case .dark: return UIColor.hex(0x8E918F)
+        default: return UIColor()
+        }
+    }
+    
+    static var googleSignInButtonText: UIColor {
+        switch Environment.userInterfaceStyle {
+        case .light: return UIColor.hex(0x1F1F1F)
+        case .dark: return UIColor.hex(0xE3E3E3)
+        default: return UIColor()
+        }
+    }
+}

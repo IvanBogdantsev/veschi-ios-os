@@ -18,6 +18,23 @@
         }
       }
     },
+    "continue_with_google" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with Google"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer avec Google"
+          }
+        }
+      }
+    },
     "search_for_countries_or_codes" : {
       "extractionState" : "manual",
       "localizations" : {
