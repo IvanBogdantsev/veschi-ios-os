@@ -60,8 +60,8 @@ final class AuthView: BaseView {
         
         // MARK: third party auth block
         thirdPartyAuthVSStackView.addArrangedSubviews(
-            googleSignInButton,
-            appleSignInButton
+            appleSignInButton,
+            googleSignInButton
         )
         thirdPartyAuthVSStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
