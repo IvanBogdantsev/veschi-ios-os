@@ -4,6 +4,7 @@
 import FirebaseCore
 import UIKit
 
+// TODO: configure Developer contact information and User support email and Logo at https://console.cloud.google.com
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate { // swiftlint:disable:this final_class
     
