@@ -9,9 +9,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private var coordinator: AppCoordinator?
     
-    func scene(_ scene: UIScene, // swiftlint:disable:this multiline_parameters_brackets
-               willConnectTo session: UISceneSession,
-               options connectionOptions: UIScene.ConnectionOptions) { // swiftlint:disable:this multiline_parameters_brackets
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
         guard let scene = (scene as? UIWindowScene) else { return }
         let windowObject = UIWindow(windowScene: scene)
         window = windowObject
